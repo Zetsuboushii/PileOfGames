@@ -1,0 +1,26 @@
+html(lang="de")
+    head
+        link(rel="icon", href="/public/favicon.ico")
+        link(rel="stylesheet", href="/public/css/main.css")
+        title POG
+
+    body
+
+        div(class="container")
+
+            <!-- Hotbar -->
+            include hotbar.pug
+            p(class="titlebar") Startseite
+            <!-- Hotbar End -->
+
+            div(class="content_box")
+                div(class="mainbox" style="width: 700px; height: 1000px")
+                    h4 Vorschläge
+                    ul(class="gallery")
+                        - for (var i = 0; i < 10; i++)
+                            li
+                                a(target="_blank" href="/" + recomm[i].title)
+                                    img(alt=recomm[i].title src="/public/img/game_covers/game" + pad(recomm[i].gNo) + "_cover.jpg")
+                                a(href="/" + recomm[i].title)
+                                    div(class="desc")
+                                        p(style="max-width: 180px")= recomm[i].title

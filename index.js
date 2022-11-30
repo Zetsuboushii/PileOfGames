@@ -1,36 +1,64 @@
+// Library's
 const express = require('express')
 const pug = require('pug')
-const {request} = require("express");
 
+// Repos
+const GameRepo = require("./repo/game")
+
+// Init
 const app = express()
+const home = pug.compileFile("./template/home.pug")
+const hotbar = pug.compileFile("./template/hotbar.pug")
+
+
+// Config values
 const port = 3000
 
-const indexT = pug.compileFile("./template/index.pug")
+// Serve files from folder public
+app.use("/public", express.static("public"))
 
-const sqlite3 = require("sqlite3").verbose();
-
-let db = new sqlite3.Database('pog.sqlite', (err) => {
-    if (err) {
-        console.error(err.message);
-    }
-    console.log('Connected to PoG');
-});
-
-app.get('/:kek', (req, res) => {
-    getGame(req.params.kek, (err, row) => {
+app.get("/home", (req, res) => {
+    GameRepo.getRecommends((err, recomm) => {
         if (err) {
-            res.send("fuck off")
+            console.log(err)
+            res.send("Random Error, ig")
+        } else if (recomm.length == 0) {
+            res.send("Empty Query")
         } else {
-            console.log(row)
-            res.send(indexT({row}))
+            res.send(home({recomm, pad: (x) => String(x).padStart(4, '0')}))
         }
     })
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+/**
+ app.get("/games",(req,res) => {
+    GameRepo.getGames((err,games) => {
+        if(err){
+            res.send("fuck you")
+        }else if (games.length == 0){
+            res.send("you get nothing 404")
+        }else{
+            console.log(games)
+            res.send(home({games, marcel: () => console.log("this is cursed")}))
+        }
+    })
 })
+ */
 
-function getGame(title, cb) {
-    db.each("SELECT orgTitle FROM game WHERE title IS ?", title, cb)
-}
+/**
+ app.get('/:gameTitle', (req, res) => {
+    GameRepo.getGame(req.params.gameTitle, (err, row) => {
+        if (err) {
+            res.send("fuck off")
+        } else if (!row) {
+            res.send("not found you whore")
+        } else {
+            res.send(home({row}))
+        }
+    })
+})
+ */
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
+})
