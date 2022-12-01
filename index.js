@@ -30,14 +30,26 @@ app.get("/home", (req, res) => {
         } else {
             //res.send(home({recomm, pad: (x) => String(x).padStart(4, '0')}))
             GameRepo.getCurrents((err, curr) => {
-                console.log("Huso")
                 if (err) {
                     console.log(err)
                     res.send("Random Error, ig")
+                    return
                 } else if (curr.length == 0) {
                     res.send("Empty Query")
+                    return
                 } else {
-                    res.send(home({recomm:recomm,curr:curr, pad:pad}))
+                    //res.send(home({recomm:recomm,curr:curr, pad:pad}))
+                    GameRepo.getCurrentBest((err, currB) => {
+                        if (err) {
+                            console.log(err)
+                            res.send("Random Error, ig")
+                        } else if (currB.length == 0) {
+                            res.send("Empty Query")
+                        } else {
+                            console.log(currB)
+                            res.send(home({recomm:recomm, curr:curr, currB:currB, pad:pad}))
+                        }
+                    })
                 }
             })
         }
