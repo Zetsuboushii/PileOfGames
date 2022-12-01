@@ -18,14 +18,28 @@ const port = 3000
 app.use("/public", express.static("public"))
 
 app.get("/home", (req, res) => {
+    let pad = (x) => String(x).padStart(4, '0')
     GameRepo.getRecommends((err, recomm) => {
         if (err) {
             console.log(err)
             res.send("Random Error, ig")
+            return
         } else if (recomm.length == 0) {
             res.send("Empty Query")
+            return
         } else {
-            res.send(home({recomm, pad: (x) => String(x).padStart(4, '0')}))
+            //res.send(home({recomm, pad: (x) => String(x).padStart(4, '0')}))
+            GameRepo.getCurrents((err, curr) => {
+                console.log("Huso")
+                if (err) {
+                    console.log(err)
+                    res.send("Random Error, ig")
+                } else if (curr.length == 0) {
+                    res.send("Empty Query")
+                } else {
+                    res.send(home({recomm:recomm,curr:curr, pad:pad}))
+                }
+            })
         }
     })
 })
