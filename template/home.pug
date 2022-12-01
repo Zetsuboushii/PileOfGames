@@ -8,19 +8,53 @@ html(lang="de")
 
         div(class="container")
 
-            <!-- Hotbar -->
+            //Hotbar
             include hotbar.pug
             p(class="titlebar") Startseite
-            <!-- Hotbar End -->
+
 
             div(class="content_box")
                 div(class="mainbox" style="width: 700px; height: 1000px")
+
+                    //Picks
                     h4 Vorschläge
                     ul(class="gallery")
-                        - for (var i = 0; i < 10; i++)
+                        - for (let i = 0; i < 10; i++)
                             li
                                 a(target="_blank" href="/" + recomm[i].title)
                                     img(alt=recomm[i].title src="/public/img/game_covers/game" + pad(recomm[i].gNo) + "_cover.jpg")
                                 a(href="/" + recomm[i].title)
                                     div(class="desc")
-                                        p(style="max-width: 180px")= recomm[i].title
+                                        if (recomm[i].title.length <= 30)
+                                            br
+                                            p(style="max-width: 180px")= recomm[i].title
+                                        else
+                                            p(style="max-width: 180px")= recomm[i].title
+
+                    //Current
+                    h4 Aktuell
+                    ul(class="gallery")
+                        - for (let i = 0; i < 10; i++)
+                            li
+                                a(target="_blank" href="/" + curr[i].title)
+                                    img(alt=curr[i].title src="/public/img/game_covers/game" + pad(curr[i].gNo) + "_cover.jpg")
+                                a(href="/" + curr[i].title)
+                                    div(class="desc")
+                                        if (curr[i].title.length <= 30)
+                                            br
+                                            p(style="max-width: 180px")= curr[i].title
+                                        else
+                                            p(style="max-width: 180px")= curr[i].title
+
+                div(class="mainbox" style="width: 350px; float: right")
+                    h4 Aktuell bestbewerteste Titel
+                    ul(class="sidebox")
+                        - for (let rank = 0; rank < 3; rank++)
+                            li
+                                span= rank + 1
+                                p
+                                    a(href="/" + currB[rank].title)
+                                        img(alt=currB[rank].title src="/public/img/game_covers/game" + pad(currB[rank].gNo) + "_cover.jpg")
+                                div(class="sidebox-info")
+                                    h4: a(class="sidebox-info-title" href="/" + currB[rank].title)= currB[rank].title
+                                    a(class="sidebox-info-platform" href="/" + currB[rank].platform)= currB[rank].name
