@@ -42,7 +42,8 @@ a {
 
 .container {
   margin: auto;
-  width: 1080px
+  width: 1080px;
+  height: auto;
 }
 
 .hotbar {
@@ -161,7 +162,6 @@ form.searchbar::after {
 .content_box {
   background-color: white;
   width: 1080px;
-  height: 110%;
   float: left;
   margin: 0;
 }
