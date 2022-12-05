@@ -18,8 +18,20 @@ const port = 3000
 // Serve files from folder public
 app.use("/public", express.static("public"))
 
-app.get("/home", (req, res) => {
+app.get("/home", async (req, res) => {
     let pad = (x) => String(x).padStart(4, '0')
+
+    try {
+        let picks = await GameRepo.getPicksPromise()
+        let current = await GameRepo.getCurrentsPromise()
+        let currentBest = await GameRepo.getCurrentBestPromise()
+
+        res.send(homeTemp({picks, current, currentBest, pad}))
+    } catch (e) {
+        console.log("Async Res Error: /home")
+    }
+
+    /**
     GameRepo.getRecommends((err, recomm) => {
         if (err) {
             console.log(err)
@@ -47,31 +59,39 @@ app.get("/home", (req, res) => {
                         } else if (currB.length == 0) {
                             res.send("Empty Query")
                         } else {
-                            res.send(homeTemp({recomm:recomm, curr:curr, currB:currB, pad:pad}))
+
                         }
                     })
                 }
             })
         }
     })
+    */
 })
 
 app.get("/:gameTitle", async (req, res) => {
     let pad = (x) => String(x).padStart(4, '0')
     let gameTitle = req.params.gameTitle
-
-    try{
+    try {
         let game = await GameRepo.getGamePromise(gameTitle)
         let developer = await GameRepo.getDeveloperPromise(gameTitle)
         let publisher = await GameRepo.getPublisherPromise(gameTitle)
         let genre = await GameRepo.getGenrePromise(gameTitle)
+        let mode = await GameRepo.getModePromise(gameTitle)
 
-    }catch (e) {
-
+        res.send(gameTemp({game, developer, publisher, genre, mode, pad}))
+    } catch (e) {
+        console.log("Async Res Error: /:gameTitle")
     }
+})
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
+})
 
 
-    GameRepo.getGame(gameTitle, (err, game) => {
+/**
+ GameRepo.getGame(gameTitle, (err, game) => {
         if (err) {
             console.log(err)
             res.send("Random Error, ig")
@@ -128,6 +148,7 @@ app.get("/:gameTitle", async (req, res) => {
         }
     })
 })
+ */
 
 /**
  app.get("/games",(req,res) => {
@@ -157,7 +178,3 @@ app.get("/:gameTitle", async (req, res) => {
     })
 })
  */
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
-})

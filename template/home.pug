@@ -21,30 +21,30 @@ html(lang="de")
                     ul(class="gallery")
                         - for (let i = 0; i < 10; i++)
                             li
-                                a(target="_blank" href="/" + recomm[i].title)
-                                    img(alt=recomm[i].title src="/public/img/game_covers/game" + pad(recomm[i].gNo) + "_cover.jpg")
-                                a(href="/" + recomm[i].title)
+                                a(target="_blank" href="/" + picks[i].title)
+                                    img(alt=picks[i].title src="/public/img/game_covers/game" + pad(picks[i].gNo) + "_cover.jpg")
+                                a(href="/" + picks[i].title)
                                     div(class="desc")
-                                        if (recomm[i].title.length <= 30)
+                                        if (picks[i].title.length <= 30)
                                             br
-                                            p(style="max-width: 180px")= recomm[i].title
+                                            p(style="max-width: 180px")= picks[i].title
                                         else
-                                            p(style="max-width: 180px")= recomm[i].title
+                                            p(style="max-width: 180px")= picks[i].title
 
                     //Current
                     h4 Aktuell
                     ul(class="gallery")
                         - for (let i = 0; i < 10; i++)
                             li
-                                a(target="_blank" href="/" + curr[i].title)
-                                    img(alt=curr[i].title src="/public/img/game_covers/game" + pad(curr[i].gNo) + "_cover.jpg")
-                                a(href="/" + curr[i].title)
+                                a(target="_blank" href="/" + current[i].title)
+                                    img(alt=current[i].title src="/public/img/game_covers/game" + pad(current[i].gNo) + "_cover.jpg")
+                                a(href="/" + current[i].title)
                                     div(class="desc")
-                                        if (curr[i].title.length <= 30)
+                                        if (current[i].title.length <= 30)
                                             br
-                                            p(style="max-width: 180px")= curr[i].title
+                                            p(style="max-width: 180px")= current[i].title
                                         else
-                                            p(style="max-width: 180px")= curr[i].title
+                                            p(style="max-width: 180px")= current[i].title
 
                 div(class="mainbox" style="width: 350px; float: right")
                     h4 Aktuell bestbewerteste Titel
@@ -53,8 +53,8 @@ html(lang="de")
                             li
                                 span= rank + 1
                                 p
-                                    a(href="/" + currB[rank].title)
-                                        img(alt=currB[rank].title src="/public/img/game_covers/game" + pad(currB[rank].gNo) + "_cover.jpg")
+                                    a(href="/" + currentBest[rank].title)
+                                        img(alt=currentBest[rank].title src="/public/img/game_covers/game" + pad(currentBest[rank].gNo) + "_cover.jpg")
                                 div(class="sidebox-info")
-                                    h4: a(class="sidebox-info-title" href="/" + currB[rank].title)= currB[rank].title
-                                    a(class="sidebox-info-platform" href="/" + currB[rank].platform)= currB[rank].name
+                                    h4: a(class="sidebox-info-title" href="/" + currentBest[rank].title)= currentBest[rank].title
+                                    a(class="sidebox-info-platform" href="/" + currentBest[rank].platform)= currentBest[rank].name
