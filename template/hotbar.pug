@@ -1,19 +1,24 @@
+link
 div(class="logo")
-    a(href="home.pug"): img(alt="PileOfGames Logo" src="/public/img/logo.png" width="400px")
+    a(href="/home"): img(alt="PileOfGames Logo" src="/public/img/logo.png" width="400px")
 
 ul(class="hotbar")
+
     //Startseite
     li: a(href="/home") Startseite
+
     //Spiele DropDwn
     li(class="dropdown")
         a(href="javascript:void(0)", class="dropbtn") Spiele
         div(class="dropdown-content")
             a(class="dropdown" href="/games") Suche
+
     //Plattformen DropDwn
     li(class="dropdown")
         a(href="javascript:void(0)" class="dropbtn") Plattformen
         div(class="dropdown-content")
             a(class="dropdown" href="/platforms") Suche
+
     //Hilfe DropDwn
     li(class="dropdown")
         a(href="javascript:void(0)" class="dropbtn") Hilfe
@@ -21,6 +26,7 @@ ul(class="hotbar")
             a(class="dropdown" href="/about") Über
             a(class="dropdown" href="/faq") FAQ
             a(class="dropdown" href="/impress") Impressum
+
     //Suche
     li(style="float: right; alignment: center; margin-right: 8px")
         form(class="searchbar" action="/searchAll" method="post")

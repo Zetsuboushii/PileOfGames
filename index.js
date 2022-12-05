@@ -7,8 +7,9 @@ const GameRepo = require("./repo/game")
 
 // Init
 const app = express()
-const home = pug.compileFile("./template/home.pug")
-const hotbar = pug.compileFile("./template/hotbar.pug")
+const homeTemp = pug.compileFile("./template/home.pug")
+const hotbarTemp = pug.compileFile("./template/hotbar.pug")
+const gameTemp = pug.compileFile("./template/game.pug")
 
 
 // Config values
@@ -28,7 +29,7 @@ app.get("/home", (req, res) => {
             res.send("Empty Query")
             return
         } else {
-            //res.send(home({recomm, pad: (x) => String(x).padStart(4, '0')}))
+            //res.send(homeTemp({recomm, pad: (x) => String(x).padStart(4, '0')}))
             GameRepo.getCurrents((err, curr) => {
                 if (err) {
                     console.log(err)
@@ -38,7 +39,7 @@ app.get("/home", (req, res) => {
                     res.send("Empty Query")
                     return
                 } else {
-                    //res.send(home({recomm:recomm,curr:curr, pad:pad}))
+                    //res.send(homeTemp({recomm:recomm,curr:curr, pad:pad}))
                     GameRepo.getCurrentBest((err, currB) => {
                         if (err) {
                             console.log(err)
@@ -46,8 +47,80 @@ app.get("/home", (req, res) => {
                         } else if (currB.length == 0) {
                             res.send("Empty Query")
                         } else {
-                            console.log(currB)
-                            res.send(home({recomm:recomm, curr:curr, currB:currB, pad:pad}))
+                            res.send(homeTemp({recomm:recomm, curr:curr, currB:currB, pad:pad}))
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
+app.get("/:gameTitle", async (req, res) => {
+    let pad = (x) => String(x).padStart(4, '0')
+    let gameTitle = req.params.gameTitle
+
+    try{
+        let game = await GameRepo.getGamePromise(gameTitle)
+        let developer = await GameRepo.getDeveloperPromise(gameTitle)
+        let publisher = await GameRepo.getPublisherPromise(gameTitle)
+        let genre = await GameRepo.getGenrePromise(gameTitle)
+
+    }catch (e) {
+
+    }
+
+
+    GameRepo.getGame(gameTitle, (err, game) => {
+        if (err) {
+            console.log(err)
+            res.send("Random Error, ig")
+            return
+        } else if (game.length == 0) {
+            res.send("Empty Query")
+            return
+        } else {
+            GameRepo.getDeveloper(gameTitle, (err, dev) => {
+                if (err) {
+                    console.log(err)
+                    res.send("Random Error, ig ejktgeo")
+                    return
+                } else if (dev.length == 0) {
+                    res.send("Empty Query")
+                    return
+                } else {
+                    GameRepo.getPublisher(gameTitle, (err, pub) => {
+                        if (err) {
+                            console.log(err)
+                            res.send("Random Error, ig")
+                            return
+                        } else if (pub.length == 0) {
+                            res.send("Empty Query")
+                            return
+                        } else {
+                            GameRepo.getGenre(gameTitle, (err, genre) => {
+                                if (err) {
+                                    console.log(err)
+                                    res.send("Random Error, ig")
+                                    return
+                                } else if (genre.length == 0) {
+                                    res.send("Empty Query")
+                                    return
+                                } else {
+                                    GameRepo.getMode(gameTitle, (err, mode) => {
+                                        if (err) {
+                                            console.log(err)
+                                            res.send("Random Error, ig")
+                                            return
+                                        } else if (mode.length == 0) {
+                                            res.send("Empty Query")
+                                            return
+                                        } else {
+                                            res.send(gameTemp({game:game, dev:dev, pub:pub, genre:genre, mode:mode, pad:pad}))
+                                        }
+                                    })
+                                }
+                            })
                         }
                     })
                 }
@@ -65,7 +138,7 @@ app.get("/home", (req, res) => {
             res.send("you get nothing 404")
         }else{
             console.log(games)
-            res.send(home({games, marcel: () => console.log("this is cursed")}))
+            res.send(homeTemp({games, marcel: () => console.log("this is cursed")}))
         }
     })
 })
@@ -79,7 +152,7 @@ app.get("/home", (req, res) => {
         } else if (!row) {
             res.send("not found you whore")
         } else {
-            res.send(home({row}))
+            res.send(homeTemp({row}))
         }
     })
 })
