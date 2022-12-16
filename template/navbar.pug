@@ -2,7 +2,7 @@ link
 div(class="logo")
     a(href="/home"): img(alt="PileOfGames Logo" src="/public/img/logo.png" width="400px")
 
-ul(class="hotbar")
+ul(class="navbar")
 
     //Startseite
     li: a(href="/home") Startseite
@@ -30,5 +30,5 @@ ul(class="hotbar")
     //Suche
     li(style="float: right; alignment: center; margin-right: 8px")
         form(class="searchbar" action="/searchAll" method="post")
-            input(name="hotbarSearch" type="text" placeholder="Suchen nach...")
-            button(type="hotbarSubmit"): img(alt="Such-Icon" style="height: 20px; filter: saturate(0%) brightness(50%)" src="/public/icons/search_glass.png")
+            input(name="navbarSearch" type="text" placeholder="Suchen nach...")
+            button(type="navbarSubmit"): img(alt="Such-Icon" style="height: 20px; filter: saturate(0%) brightness(50%)" src="/public/icons/search_glass.png")
