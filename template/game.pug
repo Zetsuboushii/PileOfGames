@@ -1,1 +1,121 @@
-p= game[0].title
+- let game = games[0]
+- let title = game.title
+- let gNo = game.gNo
+- let synTitles = game.synTitles
+- let orgTitle = game.orgTitle
+- let platform = game.platform
+- let series = game.series
+- let releaseDate = date(game.releaseDate)
+- let metasc = game.metaScore
+- let rank = game.rank
+- let usrscore = game.usrscore
+
+html(lang=de)
+    head
+        link(rel="icon", href="/public/favicon.ico")
+        link(rel="stylesheet", href="/public/css/main.css")
+        link(rel="stylesheet", href="/public/css/gamePage.css")
+        title= title
+
+    body
+        div(class="container")
+            include navbar
+            p(class="titlebar")= title
+
+            div(class="content-box")
+                div(class="leftbox")
+                    div(style="width: 300px; height: auto; border-bottom: 1px solid gray")
+                        img(alt=title, src="/public/img/game_covers/game" + pad(gNo) + "_cover.jpg")
+                    div
+                        h4 Andere Namen:
+                        if synTitles != null || orgTitle != null
+                            ul
+                                if synTitles != null
+                                    li Synonyme:
+                                        ul(style="list-style-type: square")
+                                        - for (let i = 0; i < synTitles.split("^").length; i++)
+                                            li= synTitles.split("^")[i]
+                                if orgTitle != null
+                                    li Originaltitel:
+                                        ul(style="list-style-type: square")
+                                            li= orgTitle
+
+                        h4 Plattformen:
+                        ul
+                            li Original Plattform:
+                                ul(style="list-style-type: square")
+                                    li
+                                        a(href="/" + platform)= platform
+                            if ports != null
+                                li Portierungen:
+                                    ul(style="list-style-type: square")
+                                        - for (let i = 0; i < ports.length; i++)
+                                            li
+                                                a(href="/" + ports[i].port)= ports[i].port
+
+                        h4 Weitere Informationen:
+                        ul
+                            li Spieleserie:
+                                ul(style="list-style-type: square")
+                                    li= series
+
+                            li Datum der Ersterscheinung:
+                                ul(style="list-style-type: square")
+                                    li= releaseDate
+
+                            li Genre:
+                                ul(style="list-style-type: square")
+                                    - for (let i = 0; i < genres.length; i++)
+                                        li= genres[i].genre
+
+                            li Publisher:
+                                ul(style="list-style-type: square")
+                                    - for (let i = 0; i < publishers.length; i++)
+                                        li= publishers[i].publisher
+
+                            li Entwickler:
+                                ul(style="list-style-type: square")
+                                    - for (let i = 0; i < developers.length; i++)
+                                        li=developers[i].developer
+
+                            li Spielmodi:
+                                ul(style="list-style-type: square")
+                                    - for (let i = 0; i < modes.length; i++)
+                                        li=modes[i].mode
+
+                div(class="rightbox")
+                    div(class="scoreBox")
+                        div(class="metaScoreBox")
+                            h4 MetaScore
+                            if metasc >= 90
+                                div(class="metaScore", style="background-color: limegreen")
+                                    h4= metasc
+                            else if meta >= 75
+                                div(class="metaScore", style="background-color: greenyellow")
+                                    h4= metasc
+                            else if meta >= 50
+                                div(class="metaScore", style="background-color: #ffd500")
+                                    h4= metasc
+                            else if meta >= 25
+                                div(class="metaScore", style="background-color: orangered")
+                                    h4= metasc
+                            else if meta < 25
+                                div(class="metaScore", style="background-color: red")
+                                    h4= metasc
+
+                        div(class="rankBox")
+                            h4 Ranking
+                            if rank != null
+                                h3= "#" + rank
+                            else
+                                h3 #----
+
+                        div(class="userScoreBox")
+                            h4 Nutzerbewertung
+                            if usrscore != null
+                                h3= usrscore + "/10"
+                            else
+                                h3 -- /10
+
+                    div(class="listAddBox")
+                        div(class="addBox")
