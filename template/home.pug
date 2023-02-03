@@ -13,40 +13,44 @@ html(lang="de")
             p(class="titlebar") Startseite
 
 
-            div(class="content_box")
-                div(class="mainbox" style="width: 700px")
+            div(class="content-box")
 
+                div(class="mainbox" style="width: 700px; border-right: solid 1px; margin-right: 0;")
                     //Picks
                     h4 Vorschläge
-                    ul(class="gallery")
-                        - for (let i = 0; i < 10; i++)
-                            li
-                                a(target="_blank" href="/" + picks[i].title)
-                                    img(alt=picks[i].title src="/public/img/game_covers/game" + pad(picks[i].gNo) + "_cover.jpg")
-                                a(href="/" + picks[i].title)
-                                    div(class="desc")
-                                        if (picks[i].title.length <= 30)
-                                            br
-                                            p(style="max-width: 180px")= picks[i].title
-                                        else
-                                            p(style="max-width: 180px")= picks[i].title
+                    div(class="gallery")
+                        div(class="wrapper")
+                            - for (let i = 0; i < 10; i++)
+                                div(class="item")
+                                    div
+                                        a(href="/" + picks[i].title)
+                                            img(alt=picks[i].title src="/public/img/game_covers/game" + pad(picks[i].gNo) + "_cover.jpg")
+                                    //div(class="title")
+                                        a(href="/" + picks[i].title)
+                                            if (picks[i].title.length <= 30)
+                                                br
+                                                p= picks[i].title
+                                            else
+                                                p= picks[i].title
 
                     //Current
                     h4 Aktuell
-                    ul(class="gallery")
-                        - for (let i = 0; i < 10; i++)
-                            li
-                                a(target="_blank" href="/" + current[i].title)
-                                    img(alt=current[i].title src="/public/img/game_covers/game" + pad(current[i].gNo) + "_cover.jpg")
-                                a(href="/" + current[i].title)
-                                    div(class="desc")
-                                        if (current[i].title.length <= 30)
-                                            br
-                                            p(style="max-width: 180px")= current[i].title
-                                        else
-                                            p(style="max-width: 180px")= current[i].title
+                    div(class="gallery")
+                        div(class="wrapper")
+                            - for (let i = 0; i < 10; i++)
+                                div(class="item")
+                                    div
+                                        a(href="/" + current[i].title)
+                                            img(alt=current[i].title src="/public/img/game_covers/game" + pad(current[i].gNo) + "_cover.jpg")
+                                    //div(class="title")
+                                        a(href="/" + current[i].title)
+                                            if (current[i].title.length <= 30)
+                                                br
+                                                p= current[i].title
+                                            else
+                                                p= current[i].title
 
-                div(class="mainbox" style="width: 350px; float: right")
+                div(class="mainbox" style="width: 369px; margin-left: 0;")
                     h4 Aktuell bestbewerteste Titel
                     ul(class="sidebox")
                         - for (let rank = 0; rank < 3; rank++)

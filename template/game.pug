@@ -1,11 +1,12 @@
 - let game = games[0]
 - let title = game.title
 - let gNo = game.gNo
-- let synTitles = game.synTitles
+- let synTitles = game.synTitle
 - let orgTitle = game.orgTitle
 - let platform = game.platform
 - let series = game.series
 - let releaseDate = date(game.releaseDate)
+- let synopsis = game.synopsis
 - let metasc = game.metaScore
 - let rank = game.rank
 - let usrscore = game.usrscore
@@ -28,14 +29,14 @@ html(lang=de)
                         img(alt=title, src="/public/img/game_covers/game" + pad(gNo) + "_cover.jpg")
                     div
                         h4 Andere Namen:
-                        if synTitles != null || orgTitle != null
+                        if synTitles || orgTitle
                             ul
-                                if synTitles != null
+                                if synTitles
                                     li Synonyme:
                                         ul(style="list-style-type: square")
-                                        - for (let i = 0; i < synTitles.split("^").length; i++)
-                                            li= synTitles.split("^")[i]
-                                if orgTitle != null
+                                            - for (let i = 0; i < synTitles.split("^").length; i++)
+                                                li= synTitles.split("^")[i]
+                                if orgTitle
                                     li Originaltitel:
                                         ul(style="list-style-type: square")
                                             li= orgTitle
@@ -90,16 +91,16 @@ html(lang=de)
                             if metasc >= 90
                                 div(class="metaScore", style="background-color: limegreen")
                                     h4= metasc
-                            else if meta >= 75
-                                div(class="metaScore", style="background-color: greenyellow")
+                            else if metasc >= 75
+                                div(class="metaScore", style="background-color: #a4de02")
                                     h4= metasc
-                            else if meta >= 50
+                            else if metasc >= 50
                                 div(class="metaScore", style="background-color: #ffd500")
                                     h4= metasc
-                            else if meta >= 25
+                            else if metasc >= 25
                                 div(class="metaScore", style="background-color: orangered")
                                     h4= metasc
-                            else if meta < 25
+                            else if metasc < 25
                                 div(class="metaScore", style="background-color: red")
                                     h4= metasc
 
@@ -117,5 +118,53 @@ html(lang=de)
                             else
                                 h3 -- /10
 
-                    div(class="listAddBox")
+                    //div(class="listAddBox")
                         div(class="addBox")
+
+                    div(class="synopsisBox")
+                        h4 Zusammenfassung:
+                        ul(style="list-style-type: none; text-align: justify; padding: 0 60px 20px 20px;")
+                            li=synopsis
+
+                    div(class="relatedBox")
+                        if prequels || sequels || remakes || remasters
+                            h4 Verwandte Titel:
+                            if prequels
+                                h5 Prequel(s):
+                                div(class="gallery")
+                                    div(class="wrapper")
+                                        - for (let i = 0; i < prequels.length; i++)
+                                            div(class="item")
+                                                div
+                                                    a(href="/" + prequels[i].title)
+                                                        img(alt=prequels[i].title src="/public/img/game_covers/game" + pad(prequels[i].gNo) + "_cover.jpg")
+
+                            if sequels
+                                h5 Sequel(s):
+                                div(class="gallery")
+                                    div(class="wrapper")
+                                        - for (let i = 0; i < sequels.length; i++)
+                                            div(class="item")
+                                                div
+                                                    a(href="/" + sequels[i].title)
+                                                        img(alt=sequels[i].title src="/public/img/game_covers/game" + pad(sequels[i].gNo) + "_cover.jpg")
+
+                            if remakes
+                                h5 Remake(s):
+                                div(class="gallery")
+                                    div(class="wrapper")
+                                        - for (let i = 0; i < remakes.length; i++)
+                                            div(class="item")
+                                                div
+                                                    a(href="/" + remakes[i].title)
+                                                        img(alt=remakes[i].title src="/public/img/game_covers/game" + pad(remakes[i].gNo) + "_cover.jpg")
+
+                            if remasters
+                                h5 Remaster(s):
+                                div(class="gallery")
+                                    div(class="wrapper")
+                                        - for (let i = 0; i < remasters.length; i++)
+                                            div(class="item")
+                                                div
+                                                    a(href="/" + remasters[i].title)
+                                                        img(alt=remasters[i].title src="/public/img/game_covers/game" + pad(remasters[i].gNo) + "_cover.jpg")

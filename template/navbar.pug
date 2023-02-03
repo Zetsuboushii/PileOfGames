@@ -1,5 +1,5 @@
 link
-div(class="logo")
+//div(class="logo")
     a(href="/home"): img(alt="PileOfGames Logo" src="/public/img/logo.png" width="400px")
 
 ul(class="navbar")
@@ -8,19 +8,19 @@ ul(class="navbar")
     li: a(href="/home") Startseite
 
     //Spiele DropDwn
-    li(class="dropdown")
+    //li(class="dropdown")
         a(href="javascript:void(0)", class="dropbtn") Spiele
         div(class="dropdown-content")
             a(class="dropdown" href="/games") Suche
 
     //Plattformen DropDwn
-    li(class="dropdown")
+    //li(class="dropdown")
         a(href="javascript:void(0)" class="dropbtn") Plattformen
         div(class="dropdown-content")
             a(class="dropdown" href="/platforms") Suche
 
     //Hilfe DropDwn
-    li(class="dropdown")
+    //li(class="dropdown")
         a(href="javascript:void(0)" class="dropbtn") Hilfe
         div(class="dropdown-content")
             a(class="dropdown" href="/about") Über
@@ -29,6 +29,6 @@ ul(class="navbar")
 
     //Suche
     li(style="float: right; alignment: center; margin-right: 8px")
-        form(class="searchbar" action="/searchAll" method="post")
-            input(name="navbarSearch" type="text" placeholder="Suchen nach...")
+        form(class="searchbar" action="/search" method="get")
+            input(name="s" type="text" placeholder="Suchen nach...")
             button(type="navbarSubmit"): img(alt="Such-Icon" style="height: 20px; filter: saturate(0%) brightness(50%)" src="/public/icons/search_glass.png")

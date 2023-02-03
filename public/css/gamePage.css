@@ -217,3 +217,91 @@
 .synopsisBox th {
   vertical-align: top;
 }
+
+.relatedBox {
+  margin: 5px;
+  float: left;
+  padding: 0;
+  border: none;
+  width: 750px;
+}
+
+.relatedBox h4 {
+  border-bottom: 1px solid black;
+  margin: 5px;
+}
+
+.relatedBox h5 {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 0;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.relatedBox ul {
+  margin-left: 20px;
+  margin-top: 5px;
+  border: #222222;
+}
+
+
+.relatedBox .gallery {
+  display: grid;
+  grid-column: full;
+  grid-template-columns: inherit;
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.relatedBox .gallery .wrapper {
+  grid-column: content;
+  display: flex;
+  align-items: center;
+}
+
+.relatedBox .gallery .item img {
+  max-width: 115px;
+  max-height: 15rem;
+  border-radius: 3px;
+  box-shadow: 3px 3px 2px #222222;
+}
+
+.relatedBox .gallery .item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  inline-size: 100%;
+  max-inline-size: 10rem;
+  aspect-ratio: inherit;
+  font-size: 2rem;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.relatedBox .gallery .title {
+  position: relative;
+}
+
+.relatedBox .gallery .title p {
+  margin: 0;
+  padding: 12px 0 0 0;
+  color: white;
+  font-size: 12px;
+  text-align: left;
+  vertical-align: text-bottom;
+  left: 1px;
+  background-image: url("../img/image_box_shadow_bottom.png");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  text-shadow: rgba(0,0,0,.8) 1px 1px 0;
+  line-height: 1.3em;
+}

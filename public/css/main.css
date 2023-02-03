@@ -43,7 +43,6 @@ a {
 .container {
   margin: auto;
   width: 1080px;
-  height: auto;
 }
 
 .navbar {
@@ -159,21 +158,23 @@ form.searchbar::after {
 }
 
 
-.content_box {
+.content-box {
   background-color: white;
   width: 1080px;
   float: left;
   margin: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: auto;
+  display: table;
 }
 
 
 .mainbox {
   margin: 5px;
   float: left;
-  border-style: solid;
-  border-color: #aaaaaa;
-  border-width: 1px;
   overflow: auto;
+  display: table-cell;
 }
 
 .mainbox h4 {
@@ -184,41 +185,53 @@ form.searchbar::after {
 
 
 .gallery {
-  list-style-type: none;
-  margin: 20px 0px 0px 0px;
+  display: grid;
+  grid-column: full;
+  grid-template-columns: inherit;
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.gallery .wrapper {
+  grid-column: content;
   display: flex;
-  alignment: center;
-  padding: 0;
-  overflow: auto;
+  align-items: center;
 }
 
-.gallery a {
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
-
-.gallery li {
-  display: block;
-  margin: auto;
-  padding: 10px;
-}
-
-.gallery li img {
-  alignment: center;
+.gallery .item img {
   max-width: 230px;
-  max-height: 295px;
-  border: solid gray 1px;
+  max-height: 25rem;
+  border-radius: 3px;
+  box-shadow: 3px 3px 2px #222222;
 }
 
-.desc {
-  padding: 6px 0 0 0;
+.gallery .item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  inline-size: 100%;
+  max-inline-size: 20rem;
+  aspect-ratio: inherit;
+  font-size: 2rem;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.gallery .title {
+  position: relative;
+}
+
+.gallery .title p {
+  margin: 0;
+  padding: 12px 0 0 0;
   color: white;
   font-size: 12px;
   text-align: left;
   vertical-align: text-bottom;
-  position: relative;
-  top: -53px;
   left: 1px;
   background-image: url("../img/image_box_shadow_bottom.png");
   background-position: left bottom;
@@ -227,13 +240,8 @@ form.searchbar::after {
   bottom: 0;
   z-index: 2;
   display: block;
-  max-width: 230px;
   text-shadow: rgba(0,0,0,.8) 1px 1px 0;
   line-height: 1.3em;
-}
-
-.desc-padding {
-  padding: 2px;
 }
 
 

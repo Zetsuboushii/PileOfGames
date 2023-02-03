@@ -88,8 +88,25 @@ class GameRepo {
     }
 
 
+    static getPort(search, cb) {
+        db.all("SELECT p.name AS port FROM game g, port, platform p WHERE port.refGame = g.gNo AND port.refPlatform = p.pNo AND g.title = ?", search, cb)
+    }
+
+    static async getPortPromise(search) {
+        return new Promise((resolve, reject) => {
+            this.getPort(search, (err, res) => {
+                if (err) {
+                    resolve(["null"])
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+
     static getPrequel(search, cb) {
-        db.all("SELECT g.title AS prequel FROM game g, prequel p WHERE p.refOrigin = (SELECT gNo FROM game WHERE title = ?) AND p.refPrequel = g.gNo", search, cb)
+        db.all("SELECT g.title, g.gNo FROM game g, prequel p WHERE p.refOrigin = (SELECT gNo FROM game WHERE title = ?) AND p.refPrequel = g.gNo", search, cb)
     }
 
     static async getPrequelPromise(search) {
@@ -106,7 +123,7 @@ class GameRepo {
 
 
     static getSequel(search, cb) {
-        db.all("SELECT g.title AS sequel FROM game g, prequel p WHERE p.refPrequel = (SELECT gNo FROM game WHERE title = ?) AND p.refOrigin = g.gNo", search, cb)
+        db.all("SELECT g.title, g.gNo FROM game g, prequel p WHERE p.refPrequel = (SELECT gNo FROM game WHERE title = ?) AND p.refOrigin = g.gNo", search, cb)
     }
 
     static async getSequelPromise(search) {
@@ -122,13 +139,13 @@ class GameRepo {
     }
 
 
-    static getPort(search, cb) {
-        db.all("SELECT p.name AS port FROM game g, port, platform p WHERE port.refGame = g.gNo AND port.refPlatform = p.pNo AND g.title = ?", search, cb)
+    static getRemake(search, cb) {
+        db.all("SELECT g.title, g.gNo FROM game g, remake r WHERE r.refOrigin = (SELECT gNo FROM game WHERE title = ?) AND r.refRemake = g.gNo", search, cb)
     }
 
-    static async getPortPromise(search) {
+    static async getRemakePromise(search) {
         return new Promise((resolve, reject) => {
-            this.getPort(search, (err, res) => {
+            this.getRemake(search, (err, res) => {
                 if (err) {
                     resolve(["null"])
                 } else {
@@ -137,6 +154,44 @@ class GameRepo {
             })
         })
     }
+
+    static getRemaster(search, cb) {
+        db.all("SELECT g.title, g.gNo FROM game g, remaster r WHERE r.refOrigin = (SELECT gNo FROM game WHERE title = ?) AND r.refRemaster = g.gNo", search, cb)
+    }
+
+    static async getRemasterPromise(search) {
+        return new Promise((resolve, reject) => {
+            this.getRemaster(search, (err, res) => {
+                if (err) {
+                    resolve(null)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+
+
+
+    static getSearch(search, cb) {
+        db.all("SELECT g.title, g.gNo FROM game g WHERE g.title LIKE '%' || ? || '%' ORDER BY g.releaseDate", search, cb)
+    }
+
+    static async getSearchPromise(search) {
+        return new Promise((resolve, reject) => {
+            this.getSearch(search, (err, res) => {
+                console.log(res, err)
+                if (err) {
+                    resolve(null)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+
 
 
     static getPicks(cb) {
