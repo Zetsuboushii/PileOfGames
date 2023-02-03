@@ -1,5 +1,6 @@
 // Library's
 const express = require('express')
+//const router = express.Router();
 const pug = require('pug')
 const path = require("path");
 
@@ -16,7 +17,7 @@ const app = express()
 const navbarTemp = pug.compileFile("./template/navbar.pug")
 const homeTemp = pug.compileFile("./template/home.pug")
 const gameTemp = pug.compileFile("./template/game.pug")
-
+const searchTemp = pug.compileFile("./template/search.pug")
 
 // Config values
 const port = 3000
@@ -31,10 +32,23 @@ app.get("/home", async (req, res) => {
         let picks = await GameRepo.getPicksPromise()
         let current = await GameRepo.getCurrentsPromise()
         let currentBest = await GameRepo.getCurrentBestPromise()
-
         res.send(homeTemp({picks, current, currentBest, pad}))
     } catch (e) {
         console.log("Async Res Error or Pug Error: /home")
+    }
+})
+
+app.get("/search", async (req, res) => {
+    let pad = (x) => String(x).padStart(4, '0')
+    let gameTitle = req.query.s
+    console.log(gameTitle)
+    let games = []
+    try {
+        games = await GameRepo.getSearchPromise(gameTitle)
+        console.log(games)
+        res.send(searchTemp({games, pad}))
+    } catch (e) {
+        res.send(searchTemp({games, pad}))
     }
 })
 
@@ -51,8 +65,10 @@ app.get("/:gameTitle", async (req, res) => {
         let prequels = await GameRepo.getPrequelPromise(gameTitle)
         let sequels = await GameRepo.getSequelPromise(gameTitle)
         let ports = await GameRepo.getPortPromise(gameTitle)
-        console.log(games, developers, publishers, genres, modes, prequels, sequels, ports)
-        res.send(gameTemp({games, developers, publishers, genres, modes, prequels, sequels, ports, pad, date}))
+        let remakes = await GameRepo.getRemakePromise(gameTitle)
+        let remasters = await GameRepo.getRemasterPromise(gameTitle)
+        console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters)
+        res.send(gameTemp({games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters, pad, date}))
     } catch (e) {
         console.log("Async Res Error or Pug Error: /:gameTitle")
     }
