@@ -2,14 +2,18 @@
   "name": "pog",
   "version": "1.0.0",
   "dependencies": {
+    "cookie-session": "^2.0.0",
     "express": "^5.0.0-beta.1",
+    "express-session": "^1.17.3",
     "pug": "^3.0.2",
     "sqlite3": "^5.1.2",
     "svelte": "^3.53.1"
   },
   "pkg": {
     "scripts": "index.js",
-    "targets": ["node18-win-x64"],
+    "targets": [
+      "node18-win-x64"
+    ],
     "outputPath": "dist"
   }
 }
