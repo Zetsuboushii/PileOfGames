@@ -1,8 +1,9 @@
-// Library's
+// Libraries
 const express = require('express')
-//const router = express.Router();
+const router = express.Router();
 const pug = require('pug')
 const path = require("path");
+const session = require("express-session")
 
 path.join(__dirname, "./template")
 path.join(__dirname, "./repo")
@@ -10,17 +11,29 @@ path.join(__dirname, "./public")
 path.join(__dirname, "./template")
 
 // Repos
+const Database = require("./repo/db")
 const GameRepo = require("./repo/game")
 
 // Init
 const app = express()
-const navbarTemp = pug.compileFile("./template/navbar.pug")
 const homeTemp = pug.compileFile("./template/home.pug")
 const gameTemp = pug.compileFile("./template/game.pug")
 const searchTemp = pug.compileFile("./template/search.pug")
+const loginTemp = pug.compileFile("./template/login.pug")
+const signupTemp = pug.compileFile("./template/signup.pug")
 
 // Config values
 const port = 3000
+
+//Session
+app.use(session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname, "static")))
 
 // Serve files from folder public
 app.use("/public", express.static("public"))
@@ -32,9 +45,68 @@ app.get("/home", async (req, res) => {
         let picks = await GameRepo.getPicksPromise()
         let current = await GameRepo.getCurrentsPromise()
         let currentBest = await GameRepo.getCurrentBestPromise()
-        res.send(homeTemp({picks, current, currentBest, pad}))
+        res.send(homeTemp({picks, current, currentBest, pad, session: req.session}))
     } catch (e) {
         console.log("Async Res Error or Pug Error: /home")
+    }
+})
+
+app.get("/login", (req, res) => {
+    try {
+        res.send(loginTemp({session: req.session}))
+    } catch (e) {
+        console.log(e)
+        console.log("Res Error or Pug Error: /login")
+    }
+})
+
+app.post("/login", (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+    if (username && password) {
+        Database.all("SELECT * FROM user WHERE username = ? AND password = ?", [username, password], function (error, results, fields) {
+            if (error) throw error
+            if (results.length > 0) {
+                req.session.loggedin = true
+                req.session.username = username
+                res.redirect("/home")
+            } else {
+                res.send("Incorrect Username and / or password")
+            }
+            res.end()
+        })
+    } else {
+        res.send("Please enter Username and Password")
+        res.end()
+    }
+})
+
+app.get("/signup", (req, res) => {
+    try {
+        res.send(signupTemp({session: req.session}))
+    } catch (e) {
+        console.log(e)
+        console.log("Res Error or Pug Error: /signup")
+    }
+})
+
+app.post("/signup", (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+    if (username && password) {
+        Database.all("SELECT * FROM user WHERE username = ? AND password = ?", [username, password], function (error, results, fields) {
+            if (error) throw error
+            if (results.length > 0) {
+                res.send("User bereits vorhanden")
+                res.redirect("/signup")
+            } else {
+                Database.all("INSERT INTO user (username, password) VALUES (?, ?)", [username, password], function (error, fields) {
+                    res.redirect("/home")
+                })
+            }
+        })
+    } else {
+        res.send("Please enter Username and Password")
     }
 })
 
@@ -46,9 +118,9 @@ app.get("/search", async (req, res) => {
     try {
         games = await GameRepo.getSearchPromise(gameTitle)
         console.log(games)
-        res.send(searchTemp({games, pad}))
+        res.send(searchTemp({games, pad, session: req.session}))
     } catch (e) {
-        res.send(searchTemp({games, pad}))
+        res.send(searchTemp({games, pad, session: req.session}))
     }
 })
 
@@ -68,7 +140,21 @@ app.get("/:gameTitle", async (req, res) => {
         let remakes = await GameRepo.getRemakePromise(gameTitle)
         let remasters = await GameRepo.getRemasterPromise(gameTitle)
         console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters)
-        res.send(gameTemp({games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters, pad, date}))
+        res.send(gameTemp({
+            games,
+            developers,
+            publishers,
+            genres,
+            modes,
+            prequels,
+            sequels,
+            ports,
+            remakes,
+            remasters,
+            pad,
+            date,
+            session: req.session
+        }))
     } catch (e) {
         console.log("Async Res Error or Pug Error: /:gameTitle")
     }
