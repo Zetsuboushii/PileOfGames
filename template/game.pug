@@ -47,7 +47,7 @@ html(lang=de)
                                 ul(style="list-style-type: square")
                                     li
                                         a(href="/" + platform)= platform
-                            if ports != null
+                            if ports !== null
                                 li Portierungen:
                                     ul(style="list-style-type: square")
                                         - for (let i = 0; i < ports.length; i++)
@@ -106,20 +106,22 @@ html(lang=de)
 
                         div(class="rankBox")
                             h4 Ranking
-                            if rank != null
+                            if rank !== null
                                 h3= "#" + rank
                             else
                                 h3 #----
 
                         div(class="userScoreBox")
                             h4 Nutzerbewertung
-                            if usrscore != null
+                            if usrscore !== null
                                 h3= usrscore + "/10"
                             else
                                 h3 -- /10
 
-                    //div(class="listAddBox")
+                    div(class="listAddBox")
                         div(class="addBox")
+                            form(action="/" + title method="post")
+                                button(name="listAdd" style="background-color: rebeccapurple; color: white") Zu Liste hinzufügen
 
                     div(class="synopsisBox")
                         h4 Zusammenfassung:

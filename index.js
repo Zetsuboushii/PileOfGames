@@ -21,6 +21,7 @@ const gameTemp = pug.compileFile("./template/game.pug")
 const searchTemp = pug.compileFile("./template/search.pug")
 const loginTemp = pug.compileFile("./template/login.pug")
 const signupTemp = pug.compileFile("./template/signup.pug")
+const listTemp = pug.compileFile("./template/list.pug")
 
 // Config values
 const port = 3000
@@ -124,6 +125,23 @@ app.get("/search", async (req, res) => {
     }
 })
 
+app.get("/list/:user", async (req, res) => {
+    let pad = (x) => String(x).padStart(4, '0')
+    let user = req.params.user
+    let statSelect = req.query
+    try {
+        Database.all("SELECT * FROM user WHERE username = ?", user, async function (error, results, fields) {
+            if (error) throw error
+            if (results.length == 1) {
+                let list = await GameRepo.getListPromise(user)
+                res.send(listTemp({list, user, statSelect: parseInt(statSelect["selection"]), pad, session: req.session}))
+            }
+        })
+    } catch (e) {
+        console.log("Async Res Error or Pug Error: /list/:user or user not existinga")
+    }
+})
+
 app.get("/:gameTitle", async (req, res) => {
     let pad = (x) => String(x).padStart(4, '0')
     let date = (x) => String(x).split("-")[2] + "." + String(x).split("-")[1] + "." + String(x).split("-")[0]
@@ -139,6 +157,7 @@ app.get("/:gameTitle", async (req, res) => {
         let ports = await GameRepo.getPortPromise(gameTitle)
         let remakes = await GameRepo.getRemakePromise(gameTitle)
         let remasters = await GameRepo.getRemasterPromise(gameTitle)
+
         console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters)
         res.send(gameTemp({
             games,
