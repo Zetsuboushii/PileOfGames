@@ -118,10 +118,35 @@ html(lang=de)
                             else
                                 h3 -- /10
 
-                    div(class="listAddBox")
-                        div(class="addBox")
-                            form(action="/" + title method="post")
-                                button(name="listAdd" style="background-color: rebeccapurple; color: white") Zu Liste hinzufügen
+                    if session.username
+                        div(class="listAddBox")
+                            div(class="addBox")
+                                form(action="/" + title method="post")
+                                    if listEntry.length === 0
+                                        button(name="listAdd" value="1" style="background-color: rebeccapurple; color: white") Zu Liste hinzufügen
+                                    else
+                                        button(name="listRemove" value="1" style="background-color: lavender") Von Liste entfernen
+                            if listEntry.length !== 0
+                                div(class="scoreSelectBox")
+                                    div(class="scoreSelect")
+                                        span(style="margin: 5px")
+                                            div(style="display: inline-block; margin-left: 5px") Score
+                                            form(action="#" method="post")
+                                                input(name="score" type="number" min="0" max="10" placeholder=listEntry.score)
+                                            div(style="display: inline-block; color: yellow") ★
+                                //TODO
+                                div(class="statusSelectBox")
+                                    form(action="#" method="post")
+                                        select(id="select" name="status")
+                                            option(value="6") Geplant
+                                            option(value="2") Am Spielen
+                                            option(value="3") Abgeschlossen
+                                            option(value="4") Nicht fortgesetzt
+                                            option(value="5") Abgebrochen
+                                        input(type="submit" style="width: auto" value="✓")
+
+
+
 
                     div(class="synopsisBox")
                         h4 Zusammenfassung:

@@ -7,9 +7,26 @@ class GameRepo {
         db.all("SELECT g.title AS title, g.gNo AS gNo, p.name AS platform, l.refStatus AS status, l.score AS score FROM game g, platform p, list l, status s, user u WHERE l.refUser = (SELECT uNo FROM user WHERE username = ?) AND l.refUser = u.uNo AND l.refGame = g.gNo AND p.pNo = g.orgPlatform AND l.refStatus = s.statNo ORDER BY l.refStatus", user, cb)
     }
 
-    static async getListPromise(search) {
+    static async getListPromise(user) {
         return new Promise((resolve, reject) => {
-            this.getList(search, (err, res) => {
+            this.getList(user, (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        })
+    }
+
+
+    static getListEntry(user, game, cb) {
+        db.all("SELECT g.title AS title, g.gNo AS gNo, p.name AS platform, l.refStatus AS status, l.score AS score FROM game g, platform p, list l, status s, user u WHERE l.refUser = (SELECT uNo FROM user WHERE username = ?) AND l.refUser = u.uNo AND l.refGame = g.gNo AND p.pNo = g.orgPlatform AND l.refStatus = s.statNo AND g.title = ?", user, game, cb)
+    }
+
+    static async getListEntryPromise(user, game) {
+        return new Promise((resolve, reject) => {
+            this.getListEntry(user, game, (err, res) => {
                 if (err) {
                     reject(err)
                 } else {

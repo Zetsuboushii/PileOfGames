@@ -157,8 +157,9 @@ app.get("/:gameTitle", async (req, res) => {
         let ports = await GameRepo.getPortPromise(gameTitle)
         let remakes = await GameRepo.getRemakePromise(gameTitle)
         let remasters = await GameRepo.getRemasterPromise(gameTitle)
-
-        console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters)
+        let listEntry = await GameRepo.getListEntryPromise(req.session.username, gameTitle)
+        console.log(listEntry)
+        //console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters, listEntry)
         res.send(gameTemp({
             games,
             developers,
@@ -170,6 +171,7 @@ app.get("/:gameTitle", async (req, res) => {
             ports,
             remakes,
             remasters,
+            listEntry,
             pad,
             date,
             session: req.session
@@ -177,6 +179,43 @@ app.get("/:gameTitle", async (req, res) => {
     } catch (e) {
         console.log("Async Res Error or Pug Error: /:gameTitle")
     }
+})
+
+app.post("/:gameTitle", (req, res) => {
+    let gameTitle = req.params.gameTitle
+    let input = req.body
+    let gNo = 0
+    let uId = 0
+    Database.get("SELECT gNo FROM game WHERE title = ?", [gameTitle], (err, row) => {
+        if (err) throw err
+        gNo = row.gNo
+        Database.get("SELECT uNo FROM user WHERE username = ?", [req.session.username], (err, row) => {
+            if (err) throw err
+            uId = row.uNo
+            console.log(gNo, uId)
+            if (input.listAdd === "1") {
+                Database.all("INSERT INTO list (refGame, refStatus, refUser) VALUES (?, ?, ?)", [gNo, 6, uId], function (error, results, fields) {
+
+                })
+            }
+            if (input.listRemove === "1") {
+                Database.all("DELETE FROM list WHERE refGame = ? AND refUser = ?", [gNo, uId], function (error, results, fields) {
+
+                })
+            }
+            if (input.score) {
+                Database.all("UPDATE list SET score = ? WHERE refUser = ? AND refGame = ?", [input.score, uId, gNo], function (error, results, fields) {
+
+                })
+            }
+            if (input.status) {
+                Database.all("UPDATE list SET status = ? WHERE refUser = ? AND refGame = ?", [input.status, uId, gNo], function (error, results, fields) {
+
+                })
+            }
+        })
+    })
+    return res.redirect(req.originalUrl)
 })
 
 app.listen(port, () => {
