@@ -47,7 +47,7 @@ html(lang=de)
                                 ul(style="list-style-type: square")
                                     li
                                         a(href="/" + platform)= platform
-                            if ports !== null
+                            if ports != null
                                 li Portierungen:
                                     ul(style="list-style-type: square")
                                         - for (let i = 0; i < ports.length; i++)
@@ -106,46 +106,20 @@ html(lang=de)
 
                         div(class="rankBox")
                             h4 Ranking
-                            if rank !== null
+                            if rank != null
                                 h3= "#" + rank
                             else
                                 h3 #----
 
                         div(class="userScoreBox")
                             h4 Nutzerbewertung
-                            if usrscore !== null
+                            if usrscore != null
                                 h3= usrscore + "/10"
                             else
                                 h3 -- /10
 
-                    if session.username
-                        div(class="listAddBox")
-                            div(class="addBox")
-                                form(action="/" + title method="post")
-                                    if listEntry.length === 0
-                                        button(name="listAdd" value="1" style="background-color: rebeccapurple; color: white") Zu Liste hinzufügen
-                                    else
-                                        button(name="listRemove" value="1" style="background-color: lavender") Von Liste entfernen
-                            if listEntry.length !== 0
-                                div(class="scoreSelectBox")
-                                    div(class="scoreSelect")
-                                        span(style="margin: 5px")
-                                            div(style="display: inline-block; margin-left: 5px") Score
-                                            form(action="#" method="post")
-                                                input(name="score" type="number" min="0" max="10" placeholder=listEntry[0].score ? listEntry[0].score + "": "")
-                                            div(style="display: inline-block; color: yellow") ★
-                                div(class="statusSelectBox")
-                                    form(action="#" method="post")
-                                        select(id="select" name="listStatus")
-                                            option(value="6") Geplant
-                                            option(value="2") Am Spielen
-                                            option(value="3") Abgeschlossen
-                                            option(value="4") Nicht fortgesetzt
-                                            option(value="5") Abgebrochen
-                                        input(type="submit" style="width: auto" value="✓")
-
-
-
+                    //div(class="listAddBox")
+                        div(class="addBox")
 
                     div(class="synopsisBox")
                         h4 Zusammenfassung:

@@ -41,6 +41,8 @@ ul(class="navbar")
     else
         a(href="/login" style="float: right; color: darkred; background-color: mistyrose; padding: 5px;" +
             "font-weight: bold; border-radius: 5px; margin: 9px") Logout
+        - session.loggedin = false
+        - session.loggedout = true
         a(href="/list/" + session.username style="text-align: center; float: right; color: white; padding: 5px;" +
             "background-color: rebeccapurple; font-weight: bold; border-radius: 5px;" +
             "margin: 9px")= session.username + "s Liste"

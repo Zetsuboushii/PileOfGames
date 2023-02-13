@@ -3,40 +3,6 @@ const {query} = require("express");
 
 class GameRepo {
 
-    static getList(user, cb) {
-        db.all("SELECT g.title AS title, g.gNo AS gNo, p.name AS platform, l.refStatus AS status, l.score AS score FROM game g, platform p, list l, status s, user u WHERE l.refUser = (SELECT uNo FROM user WHERE username = ?) AND l.refUser = u.uNo AND l.refGame = g.gNo AND p.pNo = g.orgPlatform AND l.refStatus = s.statNo ORDER BY l.refStatus, g.title", user, cb)
-    }
-
-    static async getListPromise(user) {
-        return new Promise((resolve, reject) => {
-            this.getList(user, (err, res) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(res)
-                }
-            })
-        })
-    }
-
-
-    static getListEntry(user, game, cb) {
-        db.all("SELECT g.title AS title, g.gNo AS gNo, p.name AS platform, l.refStatus AS status, l.score AS score FROM game g, platform p, list l, status s, user u WHERE l.refUser = (SELECT uNo FROM user WHERE username = ?) AND l.refUser = u.uNo AND l.refGame = g.gNo AND p.pNo = g.orgPlatform AND l.refStatus = s.statNo AND g.title = ?", user, game, cb)
-    }
-
-    static async getListEntryPromise(user, game) {
-        return new Promise((resolve, reject) => {
-            this.getListEntry(user, game, (err, res) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(res)
-                }
-            })
-        })
-    }
-
-
     static getGame(search, cb) {
         db.all("SELECT g.gNo, g.title, g.metaScore, g.orgTitle, g.synTitle, g.releaseDate, g.synopsis, s.name AS series, p.name AS platform, (SELECT RANK() OVER (ORDER BY metaScore DESC) FROM game WHERE releaseDate < DATE('now') ORDER BY gNo LIMIT 1 OFFSET (SELECT gNo FROM game WHERE title = ?) - 1) AS rank, (SELECT AVG(score) FROM list WHERE refGame = (SELECT gNo FROM game WHERE title = ?)) AS usrscore FROM game g, platform p, series s WHERE g.orgPlatform = p.pNo AND g.refSeries = s.sNo AND g.title = ?", search, search, search, cb)
     }

@@ -21,8 +21,6 @@ const gameTemp = pug.compileFile("./template/game.pug")
 const searchTemp = pug.compileFile("./template/search.pug")
 const loginTemp = pug.compileFile("./template/login.pug")
 const signupTemp = pug.compileFile("./template/signup.pug")
-const listTemp = pug.compileFile("./template/list.pug")
-const dbManTemp = pug.compileFile("./template/db_manager.pug")
 
 // Config values
 const port = 3000
@@ -126,67 +124,6 @@ app.get("/search", async (req, res) => {
     }
 })
 
-app.get("/list/:user", async (req, res) => {
-    let pad = (x) => String(x).padStart(4, '0')
-    let user = req.params.user
-    let statSelect = req.query
-    try {
-        Database.all("SELECT * FROM user WHERE username = ?", user, async function (error, results, fields) {
-            if (error) throw error
-            if (results.length == 1) {
-                let list = await GameRepo.getListPromise(user)
-                res.send(listTemp({
-                    list,
-                    user,
-                    statSelect: parseInt(statSelect["selection"]),
-                    pad,
-                    session: req.session
-                }))
-            }
-        })
-    } catch (e) {
-        console.log("Async Res Error or Pug Error: /list/:user or user not existinga")
-    }
-})
-
-app.get("/admin/edit/game/:gameTitle", async (req, res) => {
-    let pad = (x) => String(x).padStart(4, '0')
-    let date = (x) => String(x).split("-")[2] + "." + String(x).split("-")[1] + "." + String(x).split("-")[0]
-    let gameTitle = req.params.gameTitle
-    console.log(gameTitle)
-    let game = []
-    try {
-        game = await GameRepo.getGamePromise(gameTitle)
-        let developers = await GameRepo.getDeveloperPromise(gameTitle)
-        let publishers = await GameRepo.getPublisherPromise(gameTitle)
-        let genres = await GameRepo.getGenrePromise(gameTitle)
-        let modes = await GameRepo.getModePromise(gameTitle)
-        let prequels = await GameRepo.getPrequelPromise(gameTitle)
-        let sequels = await GameRepo.getSequelPromise(gameTitle)
-        let ports = await GameRepo.getPortPromise(gameTitle)
-        let remakes = await GameRepo.getRemakePromise(gameTitle)
-        let remasters = await GameRepo.getRemasterPromise(gameTitle)
-        console.log(game, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters)
-        res.send(dbManTemp({
-            game,
-            developers,
-            publishers,
-            genres,
-            modes,
-            prequels,
-            sequels,
-            ports,
-            remakes,
-            remasters,
-            pad,
-            date,
-            session: req.session
-        }))
-    } catch (e) {
-        throw e
-    }
-})
-
 app.get("/:gameTitle", async (req, res) => {
     let pad = (x) => String(x).padStart(4, '0')
     let date = (x) => String(x).split("-")[2] + "." + String(x).split("-")[1] + "." + String(x).split("-")[0]
@@ -202,8 +139,7 @@ app.get("/:gameTitle", async (req, res) => {
         let ports = await GameRepo.getPortPromise(gameTitle)
         let remakes = await GameRepo.getRemakePromise(gameTitle)
         let remasters = await GameRepo.getRemasterPromise(gameTitle)
-        let listEntry = await GameRepo.getListEntryPromise(req.session.username, gameTitle)
-        console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters, listEntry)
+        console.log(games, developers, publishers, genres, modes, prequels, sequels, ports, remakes, remasters)
         res.send(gameTemp({
             games,
             developers,
@@ -215,7 +151,6 @@ app.get("/:gameTitle", async (req, res) => {
             ports,
             remakes,
             remasters,
-            listEntry,
             pad,
             date,
             session: req.session
@@ -223,42 +158,6 @@ app.get("/:gameTitle", async (req, res) => {
     } catch (e) {
         console.log("Async Res Error or Pug Error: /:gameTitle")
     }
-})
-
-app.post("/:gameTitle", (req, res) => {
-    let gameTitle = req.params.gameTitle
-    let input = req.body
-    let gNo = 0
-    let uId = 0
-    Database.get("SELECT gNo FROM game WHERE title = ?", [gameTitle], (err, row) => {
-        if (err) throw err
-        gNo = row.gNo
-        Database.get("SELECT uNo FROM user WHERE username = ?", [req.session.username], (err, row) => {
-            if (err) throw err
-            uId = row.uNo
-            if (input.listAdd === "1") {
-                Database.all("INSERT INTO list (refGame, refStatus, refUser) VALUES (?, ?, ?)", [gNo, 6, uId], function (error, results, fields) {
-
-                })
-            }
-            if (input.listRemove === "1") {
-                Database.all("DELETE FROM list WHERE refGame = ? AND refUser = ?", [gNo, uId], function (error, results, fields) {
-
-                })
-            }
-            if (input.score) {
-                Database.all("UPDATE list SET score = ? WHERE refUser = ? AND refGame = ?", [input.score, uId, gNo], function (error, results, fields) {
-
-                })
-            }
-            if (input.listStatus) {
-                Database.all("UPDATE list SET refStatus = ? WHERE refUser = ? AND refGame = ?", [input.listStatus, uId, gNo], function (error, results, fields) {
-
-                })
-            }
-        })
-    })
-    return res.redirect(req.originalUrl)
 })
 
 app.listen(port, () => {
