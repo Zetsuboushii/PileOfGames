@@ -1,15 +1,15 @@
-- let game = games[0]
-- let title = game.title
-- let gNo = game.gNo
-- let synTitles = game.synTitle
-- let orgTitle = game.orgTitle
-- let platform = game.platform
-- let series = game.series
-- let releaseDate = date(game.releaseDate)
-- let synopsis = game.synopsis
-- let metasc = game.metaScore
-- let rank = game.rank
-- let usrscore = game.usrscore
+- let g = game[0]
+- let title = g.title
+- let gNo = g.gNo
+- let synTitles = g.synTitle
+- let orgTitle = g.orgTitle
+- let platform = g.platform
+- let series = g.series
+- let releaseDate = date(g.releaseDate)
+- let synopsis = g.synopsis
+- let metasc = g.metaScore
+- let rank = g.rank
+- let usrscore = g.usrscore
 
 html(lang=de)
     head
@@ -21,7 +21,9 @@ html(lang=de)
     body
         div(class="container")
             include navbar
-            p(class="titlebar")= title
+            div(class="titlebar")
+                form(action="#" method="post")
+                    input(name="title" type="text" placeholder=title style="width: 100%")
 
             div(class="content-box")
                 div(class="leftbox")
@@ -29,30 +31,34 @@ html(lang=de)
                         img(alt=title, src="/public/img/game_covers/game" + pad(gNo) + "_cover.jpg")
                     div
                         h4 Andere Namen:
-                        if synTitles || orgTitle
-                            ul
-                                if synTitles
-                                    li Synonyme:
-                                        ul(style="list-style-type: square")
-                                            - for (let i = 0; i < synTitles.split("^").length; i++)
-                                                li= synTitles.split("^")[i]
-                                if orgTitle
-                                    li Originaltitel:
-                                        ul(style="list-style-type: square")
-                                            li= orgTitle
+                        ul
+                            li Synonyme:
+                                ul(style="list-style-type: square")
+                                    - for (let i = 0; i < synTitles.split("^").length; i++)
+                                        li
+                                            form(action="#" method="post")
+                                                input(name="synTitle" type="text" placeholder=synTitles.split("^")[i] style="width: 100%")
+                            li Originaltitel:
+                                ul(style="list-style-type: square")
+                                    li
+                                        form(action="#" method="post")
+                                            input(name="orgTitle" type="text" placeholder=orgTitle style="width: 100%")
 
                         h4 Plattformen:
                         ul
                             li Original Plattform:
                                 ul(style="list-style-type: square")
                                     li
-                                        a(href="/" + platform)= platform
-                            if ports !== null
-                                li Portierungen:
-                                    ul(style="list-style-type: square")
-                                        - for (let i = 0; i < ports.length; i++)
-                                            li
-                                                a(href="/" + ports[i].port)= ports[i].port
+                                        form(action="#" method="post")
+                                            input(name="platform" type="text" placeholder=platform style="width: 100%")
+                            li Portierungen:
+                                ul(style="list-style-type: square")
+                                    - var i = 0;
+                                    while (i < ports.length + 1)
+                                        li
+                                            form(action="#" method="post")
+                                                input(name="port" type="text" placeholder=ports[i] style="width: 100%")
+                                        - i++
 
                         h4 Weitere Informationen:
                         ul
@@ -117,35 +123,6 @@ html(lang=de)
                                 h3= usrscore + "/10"
                             else
                                 h3 -- /10
-
-                    if session.username
-                        div(class="listAddBox")
-                            div(class="addBox")
-                                form(action="/" + title method="post")
-                                    if listEntry.length === 0
-                                        button(name="listAdd" value="1" style="background-color: rebeccapurple; color: white") Zu Liste hinzufügen
-                                    else
-                                        button(name="listRemove" value="1" style="background-color: lavender") Von Liste entfernen
-                            if listEntry.length !== 0
-                                div(class="scoreSelectBox")
-                                    div(class="scoreSelect")
-                                        span(style="margin: 5px")
-                                            div(style="display: inline-block; margin-left: 5px") Score
-                                            form(action="#" method="post")
-                                                input(name="score" type="number" min="0" max="10" placeholder=listEntry[0].score ? listEntry[0].score + "": "")
-                                            div(style="display: inline-block; color: yellow") ★
-                                div(class="statusSelectBox")
-                                    form(action="#" method="post")
-                                        select(id="select" name="listStatus")
-                                            option(value="6") Geplant
-                                            option(value="2") Am Spielen
-                                            option(value="3") Abgeschlossen
-                                            option(value="4") Nicht fortgesetzt
-                                            option(value="5") Abgebrochen
-                                        input(type="submit" style="width: auto" value="✓")
-
-
-
 
                     div(class="synopsisBox")
                         h4 Zusammenfassung:

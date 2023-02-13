@@ -1339,338 +1339,790 @@
     <table id="501" parent="166" name="status"/>
     <table id="502" parent="166" name="user"/>
     <column id="503" parent="482" name="ctNo">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
     <column id="504" parent="482" name="description">
       <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="505" parent="483" name="devNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="506" parent="483" name="name">
-      <DasType>varchar|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="507" parent="484" name="gNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="508" parent="484" name="title">
-      <DasType>varchar|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="509" parent="484" name="orgPlatform">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="510" parent="484" name="pagePath">
-      <DasType>varchar|0s</DasType>
-      <Position>4</Position>
-    </column>
-    <column id="511" parent="484" name="imgCover">
-      <DasType>varchar|0s</DasType>
-      <Position>5</Position>
-    </column>
-    <column id="512" parent="484" name="imgLogo">
-      <DasType>varchar|0s</DasType>
-      <Position>6</Position>
-    </column>
-    <column id="513" parent="484" name="metaScore">
-      <DasType>integer|0s</DasType>
-      <Position>7</Position>
-    </column>
-    <column id="514" parent="484" name="orgTitle">
-      <DasType>varchar|0s</DasType>
-      <Position>8</Position>
-    </column>
-    <column id="515" parent="484" name="synTitle">
-      <DasType>varchar|0s</DasType>
-      <Position>9</Position>
-    </column>
-    <column id="516" parent="484" name="refSeries">
-      <DasType>integer|0s</DasType>
-      <Position>10</Position>
-    </column>
-    <column id="517" parent="484" name="releaseDate">
-      <DasType>date|0s</DasType>
-      <Position>11</Position>
-    </column>
-    <column id="518" parent="484" name="synopsis">
-      <DasType>text|0s</DasType>
-      <Position>12</Position>
-    </column>
-    <column id="519" parent="485" name="no">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="520" parent="485" name="refGame">
-      <DasType>integer|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="521" parent="485" name="refDeveloper">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="522" parent="486" name="no">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="523" parent="486" name="refGame">
-      <DasType>integer|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="524" parent="486" name="refGenre">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="525" parent="487" name="no">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="526" parent="487" name="refGame">
-      <DasType>integer|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="527" parent="487" name="refMode">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="528" parent="488" name="no">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="529" parent="488" name="refGame">
-      <DasType>integer|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="530" parent="488" name="refPublisher">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="531" parent="489" name="genNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="532" parent="489" name="name">
-      <DasType>varchar|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="533" parent="490" name="entryNo">
+    <index id="505" parent="482" name="sqlite_autoindex_consoletype_1">
+      <ColNames>description</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="506" parent="482">
+      <ColNames>ctNo</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="507" parent="482">
+      <ColNames>description</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_consoletype_1</UnderlyingIndexName>
+    </key>
+    <column id="508" parent="483" name="devNo">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="534" parent="490" name="refGame">
-      <DasType>integer|0s</DasType>
+    <column id="509" parent="483" name="name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="535" parent="490" name="refStatus">
+    <index id="510" parent="483" name="sqlite_autoindex_developer_1">
+      <ColNames>devNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="511" parent="483" name="sqlite_autoindex_developer_2">
+      <ColNames>name</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="512" parent="483">
+      <ColNames>devNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_developer_1</UnderlyingIndexName>
+    </key>
+    <key id="513" parent="483">
+      <ColNames>devNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_developer_1</UnderlyingIndexName>
+    </key>
+    <key id="514" parent="483">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_developer_2</UnderlyingIndexName>
+    </key>
+    <column id="515" parent="484" name="gNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="516" parent="484" name="title">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="517" parent="484" name="orgPlatform">
       <DasType>integer|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="536" parent="490" name="refUser">
+    <column id="518" parent="484" name="metaScore">
       <DasType>integer|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="537" parent="490" name="score">
-      <DasType>integer|0s</DasType>
+    <column id="519" parent="484" name="orgTitle">
+      <DasType>text|0s</DasType>
       <Position>5</Position>
     </column>
-    <key id="538" parent="490">
-      <ColNames>entryNo</ColNames>
+    <column id="520" parent="484" name="synTitle">
+      <DasType>text|0s</DasType>
+      <Position>6</Position>
+    </column>
+    <column id="521" parent="484" name="refSeries">
+      <DasType>integer|0s</DasType>
+      <Position>7</Position>
+    </column>
+    <column id="522" parent="484" name="releaseDate">
+      <DasType>text|0s</DasType>
+      <Position>8</Position>
+    </column>
+    <column id="523" parent="484" name="synopsis">
+      <DasType>text|0s</DasType>
+      <Position>9</Position>
+    </column>
+    <foreign-key id="524" parent="484" name="game_platform_pNo_fk">
+      <ColNames>orgPlatform</ColNames>
+      <OnDelete>set-null</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>pNo</RefColNames>
+      <RefTableName>platform</RefTableName>
+    </foreign-key>
+    <foreign-key id="525" parent="484" name="game_series_sNo_fk">
+      <ColNames>refSeries</ColNames>
+      <OnDelete>set-null</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>sNo</RefColNames>
+      <RefTableName>series</RefTableName>
+    </foreign-key>
+    <key id="526" parent="484">
+      <ColNames>gNo</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="539" parent="491" name="modeNo">
+    <column id="527" parent="485" name="no">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="540" parent="491" name="name">
-      <DasType>varchar|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="541" parent="492" name="pNo">
+    <column id="528" parent="485" name="refGame">
       <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="542" parent="492" name="name">
-      <DasType>varchar|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="543" parent="492" name="alias">
-      <DasType>varchar|0s</DasType>
+    <column id="529" parent="485" name="refDeveloper">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="544" parent="492" name="consoleType">
+    <foreign-key id="530" parent="485" name="game_developer_game_gNo_fk">
+      <ColNames>refGame</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="531" parent="485" name="game_developer_developer_devNo_fk">
+      <ColNames>refDeveloper</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>devNo</RefColNames>
+      <RefTableName>developer</RefTableName>
+    </foreign-key>
+    <index id="532" parent="485" name="sqlite_autoindex_game_developer_1">
+      <ColNames>no</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="533" parent="485">
+      <ColNames>no</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_game_developer_1</UnderlyingIndexName>
+    </key>
+    <key id="534" parent="485">
+      <ColNames>no</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_game_developer_1</UnderlyingIndexName>
+    </key>
+    <column id="535" parent="486" name="no">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="536" parent="486" name="refGame">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="537" parent="486" name="refGenre">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="538" parent="486" name="game_genre_game_gNo_fk">
+      <ColNames>refGame</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="539" parent="486" name="game_genre_genre_genNo_fk">
+      <ColNames>refGenre</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>genNo</RefColNames>
+      <RefTableName>genre</RefTableName>
+    </foreign-key>
+    <index id="540" parent="486" name="sqlite_autoindex_game_genre_1">
+      <ColNames>no</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="541" parent="486">
+      <ColNames>no</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_game_genre_1</UnderlyingIndexName>
+    </key>
+    <key id="542" parent="486">
+      <ColNames>no</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_game_genre_1</UnderlyingIndexName>
+    </key>
+    <column id="543" parent="487" name="no">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="544" parent="487" name="refGame">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="545" parent="487" name="refMode">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="546" parent="487" name="game_mode_game_gNo_fk">
+      <ColNames>refGame</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="547" parent="487" name="game_mode_mode_modeNo_fk">
+      <ColNames>refMode</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>modeNo</RefColNames>
+      <RefTableName>mode</RefTableName>
+    </foreign-key>
+    <index id="548" parent="487" name="sqlite_autoindex_game_mode_1">
+      <ColNames>no</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="549" parent="487">
+      <ColNames>no</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_game_mode_1</UnderlyingIndexName>
+    </key>
+    <key id="550" parent="487">
+      <ColNames>no</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_game_mode_1</UnderlyingIndexName>
+    </key>
+    <column id="551" parent="488" name="no">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="552" parent="488" name="refGame">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="553" parent="488" name="refPublisher">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="554" parent="488" name="game_publisher_game_gNo_fk">
+      <ColNames>refGame</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="555" parent="488" name="game_publisher_publisher_pubNo_fk">
+      <ColNames>refPublisher</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>pubNo</RefColNames>
+      <RefTableName>publisher</RefTableName>
+    </foreign-key>
+    <index id="556" parent="488" name="sqlite_autoindex_game_publisher_1">
+      <ColNames>no</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="557" parent="488">
+      <ColNames>no</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_game_publisher_1</UnderlyingIndexName>
+    </key>
+    <key id="558" parent="488">
+      <ColNames>no</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_game_publisher_1</UnderlyingIndexName>
+    </key>
+    <column id="559" parent="489" name="genNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="560" parent="489" name="name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <index id="561" parent="489" name="sqlite_autoindex_genre_1">
+      <ColNames>genNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="562" parent="489">
+      <ColNames>genNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_genre_1</UnderlyingIndexName>
+    </key>
+    <key id="563" parent="489">
+      <ColNames>genNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_genre_1</UnderlyingIndexName>
+    </key>
+    <column id="564" parent="490" name="entryNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="565" parent="490" name="refGame">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="566" parent="490" name="refStatus">
+      <DasType>integer|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="567" parent="490" name="refUser">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="545" parent="492" name="developer">
+    <column id="568" parent="490" name="score">
       <DasType>integer|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="546" parent="492" name="generation">
+    <foreign-key id="569" parent="490" name="list_game_gNo_fk">
+      <ColNames>refGame</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="570" parent="490" name="list_status_statNo_fk">
+      <ColNames>refStatus</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>statNo</RefColNames>
+      <RefTableName>status</RefTableName>
+    </foreign-key>
+    <foreign-key id="571" parent="490" name="list_user_uNo_fk">
+      <ColNames>refUser</ColNames>
+      <RefColNames>uNo</RefColNames>
+      <RefTableName>user</RefTableName>
+    </foreign-key>
+    <index id="572" parent="490" name="sqlite_autoindex_list_1">
+      <ColNames>entryNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="573" parent="490">
+      <ColNames>entryNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_list_1</UnderlyingIndexName>
+    </key>
+    <key id="574" parent="490">
+      <ColNames>entryNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_list_1</UnderlyingIndexName>
+    </key>
+    <column id="575" parent="491" name="modeNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="576" parent="491" name="name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <index id="577" parent="491" name="sqlite_autoindex_mode_1">
+      <ColNames>modeNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="578" parent="491">
+      <ColNames>modeNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_mode_1</UnderlyingIndexName>
+    </key>
+    <key id="579" parent="491">
+      <ColNames>modeNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_mode_1</UnderlyingIndexName>
+    </key>
+    <column id="580" parent="492" name="pNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="581" parent="492" name="name">
+      <DasType>text|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="582" parent="492" name="alias">
+      <DasType>text|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="583" parent="492" name="consoleType">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="584" parent="492" name="developer">
+      <DasType>integer|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <column id="585" parent="492" name="generation">
       <DasType>integer|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="547" parent="492" name="imgLogo">
-      <DasType>varchar|0s</DasType>
+    <column id="586" parent="492" name="manufacturer">
+      <DasType>integer|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="548" parent="492" name="imgPhoto">
-      <DasType>varchar|0s</DasType>
+    <column id="587" parent="492" name="media">
+      <DasType>text|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="549" parent="492" name="manufacturer">
-      <DasType>integer|0s</DasType>
+    <column id="588" parent="492" name="millUnitsSold">
+      <DasType>real|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="550" parent="492" name="media">
-      <DasType>varchar|0s</DasType>
+    <column id="589" parent="492" name="predecessor">
+      <DasType>integer|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="551" parent="492" name="millUnitsSold">
-      <DasType>double|0s</DasType>
+    <column id="590" parent="492" name="releaseDate">
+      <DasType>text|0s</DasType>
       <Position>11</Position>
     </column>
-    <column id="552" parent="492" name="predecessor">
-      <DasType>integer|0s</DasType>
+    <column id="591" parent="492" name="synopsis">
+      <DasType>text|0s</DasType>
       <Position>12</Position>
     </column>
-    <column id="553" parent="492" name="successor">
+    <foreign-key id="592" parent="492" name="platform_consoletype_ctNo_fk">
+      <ColNames>consoleType</ColNames>
+      <OnDelete>set-null</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>ctNo</RefColNames>
+      <RefTableName>consoletype</RefTableName>
+    </foreign-key>
+    <foreign-key id="593" parent="492" name="platform_developer_devNo_fk">
+      <ColNames>developer</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>devNo</RefColNames>
+      <RefTableName>developer</RefTableName>
+    </foreign-key>
+    <foreign-key id="594" parent="492" name="platform_publisher_pubNo_fk">
+      <ColNames>manufacturer</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>pubNo</RefColNames>
+      <RefTableName>publisher</RefTableName>
+    </foreign-key>
+    <foreign-key id="595" parent="492" name="platform_platform_pNo_fk">
+      <ColNames>predecessor</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>pNo</RefColNames>
+      <RefTableName>platform</RefTableName>
+    </foreign-key>
+    <index id="596" parent="492" name="sqlite_autoindex_platform_1">
+      <ColNames>pNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="597" parent="492">
+      <ColNames>pNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_platform_1</UnderlyingIndexName>
+    </key>
+    <key id="598" parent="492">
+      <ColNames>pNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_platform_1</UnderlyingIndexName>
+    </key>
+    <column id="599" parent="493" name="no">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
-      <Position>13</Position>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
     </column>
-    <column id="554" parent="492" name="releaseDate">
-      <DasType>date|0s</DasType>
-      <Position>14</Position>
+    <column id="600" parent="493" name="refGame">
+      <DasType>integer|0s</DasType>
+      <Position>2</Position>
     </column>
-    <column id="555" parent="492" name="synopsis">
-      <DasType>text|0s</DasType>
-      <Position>15</Position>
+    <column id="601" parent="493" name="refPlatform">
+      <DasType>integer|0s</DasType>
+      <Position>3</Position>
     </column>
-    <column id="556" parent="492" name="pagePath">
+    <foreign-key id="602" parent="493" name="port_game_gNo_fk">
+      <ColNames>refGame</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="603" parent="493" name="port_platform_pNo_fk">
+      <ColNames>refPlatform</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>pNo</RefColNames>
+      <RefTableName>platform</RefTableName>
+    </foreign-key>
+    <index id="604" parent="493" name="sqlite_autoindex_port_1">
+      <ColNames>no</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="605" parent="493">
+      <ColNames>no</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_port_1</UnderlyingIndexName>
+    </key>
+    <key id="606" parent="493">
+      <ColNames>no</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_port_1</UnderlyingIndexName>
+    </key>
+    <column id="607" parent="494" name="preNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="608" parent="494" name="refOrigin">
+      <DasType>integer|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="609" parent="494" name="refPrequel">
+      <DasType>integer|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="610" parent="494" name="prequel_game_gNo_fk">
+      <ColNames>refOrigin</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="611" parent="494" name="prequel_game_gNo_fk_2">
+      <ColNames>refPrequel</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <index id="612" parent="494" name="sqlite_autoindex_prequel_1">
+      <ColNames>preNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="613" parent="494">
+      <ColNames>preNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_prequel_1</UnderlyingIndexName>
+    </key>
+    <key id="614" parent="494">
+      <ColNames>preNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_prequel_1</UnderlyingIndexName>
+    </key>
+    <column id="615" parent="495" name="pubNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="616" parent="495" name="name">
       <DasType>varchar|0s</DasType>
-      <Position>16</Position>
+      <Position>2</Position>
     </column>
-    <column id="557" parent="493" name="no">
+    <index id="617" parent="495" name="sqlite_autoindex_publisher_1">
+      <ColNames>pubNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="618" parent="495">
+      <ColNames>pubNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_publisher_1</UnderlyingIndexName>
+    </key>
+    <key id="619" parent="495">
+      <ColNames>pubNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_publisher_1</UnderlyingIndexName>
+    </key>
+    <column id="620" parent="496" name="reNo">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="558" parent="493" name="refGame">
+    <column id="621" parent="496" name="refOrigin">
       <DasType>integer|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="559" parent="493" name="refPlatform">
+    <column id="622" parent="496" name="refRemake">
       <DasType>integer|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="560" parent="494" name="preNo">
+    <foreign-key id="623" parent="496" name="remake_game_gNo_fk">
+      <ColNames>refOrigin</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="624" parent="496" name="remake_game_gNo_fk_2">
+      <ColNames>refRemake</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <index id="625" parent="496" name="sqlite_autoindex_remake_1">
+      <ColNames>reNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="626" parent="496">
+      <ColNames>reNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_remake_1</UnderlyingIndexName>
+    </key>
+    <key id="627" parent="496">
+      <ColNames>reNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_remake_1</UnderlyingIndexName>
+    </key>
+    <column id="628" parent="497" name="remNo">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="561" parent="494" name="refOrigin">
+    <column id="629" parent="497" name="refOrigin">
       <DasType>integer|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="562" parent="494" name="refPrequel">
+    <column id="630" parent="497" name="refRemaster">
       <DasType>integer|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="563" parent="495" name="pubNo">
+    <foreign-key id="631" parent="497" name="remaster_game_gNo_fk">
+      <ColNames>refOrigin</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <foreign-key id="632" parent="497" name="remaster_game_gNo_fk_2">
+      <ColNames>refRemaster</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+      <RefColNames>gNo</RefColNames>
+      <RefTableName>game</RefTableName>
+    </foreign-key>
+    <index id="633" parent="497" name="sqlite_autoindex_remaster_1">
+      <ColNames>remNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="634" parent="497">
+      <ColNames>remNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_remaster_1</UnderlyingIndexName>
+    </key>
+    <key id="635" parent="497">
+      <ColNames>remNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_remaster_1</UnderlyingIndexName>
+    </key>
+    <column id="636" parent="498" name="sNo">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="564" parent="495" name="name">
+    <column id="637" parent="498" name="name">
       <DasType>varchar|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="565" parent="496" name="reNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="566" parent="496" name="refOrigin">
-      <DasType>integer|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="567" parent="496" name="refRemake">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="568" parent="497" name="remNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="569" parent="497" name="refOrigin">
-      <DasType>integer|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="570" parent="497" name="refRemaster">
-      <DasType>integer|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="571" parent="498" name="sNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="572" parent="498" name="name">
-      <DasType>varchar|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="573" parent="499" name="type">
+    <index id="638" parent="498" name="sqlite_autoindex_series_1">
+      <ColNames>sNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="639" parent="498">
+      <ColNames>sNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_series_1</UnderlyingIndexName>
+    </key>
+    <key id="640" parent="498">
+      <ColNames>sNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_series_1</UnderlyingIndexName>
+    </key>
+    <column id="641" parent="499" name="type">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="574" parent="499" name="name">
+    <column id="642" parent="499" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="575" parent="499" name="tbl_name">
+    <column id="643" parent="499" name="tbl_name">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="576" parent="499" name="rootpage">
+    <column id="644" parent="499" name="rootpage">
       <DasType>INT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="577" parent="499" name="sql">
+    <column id="645" parent="499" name="sql">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="578" parent="500" name="name">
+    <column id="646" parent="500" name="name">
       <Position>1</Position>
     </column>
-    <column id="579" parent="500" name="seq">
+    <column id="647" parent="500" name="seq">
       <Position>2</Position>
     </column>
-    <column id="580" parent="501" name="statNo">
-      <DasType>integer|0s</DasType>
-      <Position>1</Position>
-    </column>
-    <column id="581" parent="501" name="status">
-      <DasType>varchar|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="582" parent="502" name="uNo">
+    <column id="648" parent="501" name="statNo">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="583" parent="502" name="username">
+    <column id="649" parent="501" name="status">
       <DasType>varchar|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="584" parent="502" name="password">
+    <index id="650" parent="501" name="sqlite_autoindex_status_1">
+      <ColNames>statNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="651" parent="501">
+      <ColNames>statNo</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_status_1</UnderlyingIndexName>
+    </key>
+    <key id="652" parent="501">
+      <ColNames>statNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_status_1</UnderlyingIndexName>
+    </key>
+    <column id="653" parent="502" name="uNo">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="654" parent="502" name="username">
+      <DasType>varchar|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="655" parent="502" name="password">
       <DasType>varchar|0s</DasType>
       <Position>3</Position>
     </column>
-    <key id="585" parent="502">
+    <index id="656" parent="502" name="sqlite_autoindex_user_1">
+      <ColNames>uNo</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="657" parent="502">
       <ColNames>uNo</ColNames>
       <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_user_1</UnderlyingIndexName>
+    </key>
+    <key id="658" parent="502">
+      <ColNames>uNo</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_user_1</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
