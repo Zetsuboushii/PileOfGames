@@ -184,6 +184,7 @@ app.get("/:gameTitle", async (req, res) => {
 app.post("/:gameTitle", (req, res) => {
     let gameTitle = req.params.gameTitle
     let input = req.body
+    console.log(input)
     let gNo = 0
     let uId = 0
     Database.get("SELECT gNo FROM game WHERE title = ?", [gameTitle], (err, row) => {
@@ -208,9 +209,10 @@ app.post("/:gameTitle", (req, res) => {
 
                 })
             }
-            if (input.status) {
-                Database.all("UPDATE list SET status = ? WHERE refUser = ? AND refGame = ?", [input.status, uId, gNo], function (error, results, fields) {
-
+            if (input.listStatus) {
+                console.log("1")
+                Database.all("UPDATE list SET refStatus = ? WHERE refUser = ? AND refGame = ?", [input.listStatus, uId, gNo], function (error, results, fields) {
+                    console.log(error, results)
                 })
             }
         })

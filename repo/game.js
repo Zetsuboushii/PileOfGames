@@ -4,7 +4,7 @@ const {query} = require("express");
 class GameRepo {
 
     static getList(user, cb) {
-        db.all("SELECT g.title AS title, g.gNo AS gNo, p.name AS platform, l.refStatus AS status, l.score AS score FROM game g, platform p, list l, status s, user u WHERE l.refUser = (SELECT uNo FROM user WHERE username = ?) AND l.refUser = u.uNo AND l.refGame = g.gNo AND p.pNo = g.orgPlatform AND l.refStatus = s.statNo ORDER BY l.refStatus", user, cb)
+        db.all("SELECT g.title AS title, g.gNo AS gNo, p.name AS platform, l.refStatus AS status, l.score AS score FROM game g, platform p, list l, status s, user u WHERE l.refUser = (SELECT uNo FROM user WHERE username = ?) AND l.refUser = u.uNo AND l.refGame = g.gNo AND p.pNo = g.orgPlatform AND l.refStatus = s.statNo ORDER BY l.refStatus, g.title", user, cb)
     }
 
     static async getListPromise(user) {
