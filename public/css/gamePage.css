@@ -1,0 +1,307 @@
+.leftbox {
+  margin: 0;
+  margin-left: 5px;
+  padding: 0;
+  width: 300px;
+  height: auto;
+  float: left;
+  border-style: solid;
+  border-color: #aaaaaa;
+  border-width: 1px;
+  border-top: none;
+}
+
+.leftbox img {
+  display: block;
+  margin: 5px auto 5px auto;
+  max-height: 290px;
+  max-width: 290px;
+}
+
+.leftbox h4 {
+  margin: 5px;
+  padding: 0;
+  border-bottom: 1px solid;
+}
+
+.leftbox ul {
+  margin: 5px;
+  margin-left: 20px;
+  padding: 1px;
+  list-style-type: none;
+}
+
+.leftbox ul a {
+  color: #333333;
+}
+
+.leftbox ul a:hover {
+  text-decoration: underline;
+}
+
+
+.rightbox {
+  margin: 0;
+  padding: 0;
+  width: 760px;
+  height: auto;
+  float: left;
+  border: none;
+}
+
+.scoreBox {
+  display: table;
+  margin: 10px;
+  padding: 0;
+  width: 600px;
+  height: 100px;
+  float: left;
+  border-style: solid;
+  border-color: #aaaaaa;
+  border-width: 1px;
+  text-align: center;
+}
+
+.scoreBox h4 {
+  margin: 0;
+  margin-top: 2px;
+  padding: 0;
+}
+
+.metaScoreBox {
+  display: table-cell;
+  margin: 5px;
+  margin-left: 0;
+  padding: 0;
+  width: 200px;
+  height: 90px;
+  border-right: 1px solid #aaaaaa;
+}
+
+.metaScore {
+  text-align: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  position: relative;
+  left: 65px;
+  top: 2px;
+}
+
+.metaScore h4 {
+  font-size: 30px;
+  color: white;
+  line-height: 70px;
+}
+
+.rankBox {
+  display: table-cell;
+  margin: 5px;
+  margin-left: 0;
+  padding: 0;
+  width: 200px;
+  height: 90px;
+  border-right: 1px solid #aaaaaa;
+}
+
+.rankBox h3 {
+  line-height: 15px;
+  font-size: 26px;
+}
+
+.userScoreBox h3 {
+  line-height: 15px;
+  font-size: 26px;
+}
+
+.listAddBox {
+  display: table;
+  margin: 10px;
+  margin-top: 0px;
+  padding: 0;
+  width: 600px;
+  height: 30px;
+  float: left;
+  border-style: solid;
+  border-color: #aaaaaa;
+  border-width: 1px;
+  text-align: center;
+}
+
+.addBox {
+  display: table-cell;
+  margin: 5px;
+  margin-left: 0;
+  padding: 0;
+  width: 200px;
+  height: 25px;
+}
+
+.addBox button {
+  margin-top: 15px;
+  border: 1px solid rebeccapurple;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 24px;
+}
+
+.addBox button:hover {
+  border: 1px solid #333333;
+  color: #333333;
+}
+
+.scoreSelectBox {
+  display: table-cell;
+  margin: 5px;
+  margin-left: 0;
+  padding: 0;
+  width: 200px;
+  height: 25px;
+}
+
+.scoreSelect form {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+.scoreSelect input {
+  width: 24px;
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  font-family: Arial;
+  border-bottom: 1px solid #333333;
+}
+
+.scoreSelect input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.scoreSelect input::-webkit-outer-spin-button,
+             input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.statusSelectBox {
+  width: 200px;
+}
+
+.synopsisBox {
+  margin: 5px;
+  float: left;
+  padding: 0;
+  border: none;
+  width: 750px;
+}
+
+.synopsisBox h4 {
+  border-bottom: 1px solid black;
+  margin: 5px;
+}
+
+.synopsisBox a {
+  color: #333333;
+}
+
+.synopsisBox a:hover {
+  text-decoration: underline;
+}
+
+.synopsisBox table {
+  text-align: left;
+  vertical-align: top;
+}
+
+.synopsisBox th {
+  vertical-align: top;
+}
+
+.relatedBox {
+  margin: 5px;
+  float: left;
+  padding: 0;
+  border: none;
+  width: 750px;
+}
+
+.relatedBox h4 {
+  border-bottom: 1px solid black;
+  margin: 5px;
+}
+
+.relatedBox h5 {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 0;
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.relatedBox ul {
+  margin-left: 20px;
+  margin-top: 5px;
+  border: #222222;
+}
+
+
+.relatedBox .gallery {
+  display: grid;
+  grid-column: full;
+  grid-template-columns: inherit;
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.relatedBox .gallery .wrapper {
+  grid-column: content;
+  display: flex;
+  align-items: center;
+}
+
+.relatedBox .gallery .item img {
+  max-width: 115px;
+  max-height: 15rem;
+  border-radius: 3px;
+  box-shadow: 3px 3px 2px #222222;
+}
+
+.relatedBox .gallery .item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  inline-size: 100%;
+  max-inline-size: 10rem;
+  aspect-ratio: inherit;
+  font-size: 2rem;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.relatedBox .gallery .title {
+  position: relative;
+}
+
+.relatedBox .gallery .title p {
+  margin: 0;
+  padding: 12px 0 0 0;
+  color: white;
+  font-size: 12px;
+  text-align: left;
+  vertical-align: text-bottom;
+  left: 1px;
+  background-image: url("../img/image_box_shadow_bottom.png");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  text-shadow: rgba(0,0,0,.8) 1px 1px 0;
+  line-height: 1.3em;
+}
