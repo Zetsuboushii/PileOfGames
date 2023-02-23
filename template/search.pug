@@ -1,0 +1,26 @@
+html(lang=de)
+    head
+        link(rel="icon", href="/public/favicon.ico")
+        link(rel="stylesheet", href="/public/css/main.css")
+        link(rel="stylesheet", href="/public/css/gamePage.css")
+        title Suche
+
+    body
+        div(class="container")
+            include navbar
+            p(class="titlebar") Suche
+
+            div(class="content-box")
+                div(class="mainbox", style="width: 1070px; height: 800px")
+                    h4 Suchergebnisse
+                    if games
+                        div(class="gallery")
+                            div(class="wrapper")
+                                - for (let i = 0; i < games.length; i++)
+                                    div(class="item")
+                                        div
+                                            a(href="/" + games[i].title)
+                                                img(alt=games[i].title src="/public/img/game_covers/game" + pad(games[i].gNo) + "_cover.jpg")
+
+                    else
+                        p Keine Ergebnisse gefunden.

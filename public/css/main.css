@@ -1,0 +1,366 @@
+html {
+  font-family: Arial;
+  color: #333333;
+  margin: 0;
+}
+
+.logo {
+  background-color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("/public/img/back.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'Oracles';
+  src: url("../fonts/Oracles.ttf");
+}
+
+@font-face {
+  font-family: 'Red and Green';
+  src: url("../fonts/RedAndGreen.ttf");
+}
+
+@font-face {
+  font-family: 'The Past';
+  src: url("../fonts/ThePast.ttf");
+}
+
+@font-face {
+  font-family: 'Baton of Wind';
+  src: url("../fonts/BatonOfWind.ttf");
+}
+
+.container {
+  margin: auto;
+  width: 1080px;
+}
+
+.navbar {
+  list-style-type: none;
+  width: 1080px;
+  margin: 0;
+  alignment: center;
+  padding: 0;
+  overflow: hidden;
+  background-color: rebeccapurple;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.navbar li a:hover, .dropdown:hover .dropbtn {
+  background-color: lavender;
+  color: black;
+}
+
+.navbar li.dropdown {
+  display: inline-block;
+}
+
+.navbar .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: lavender;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.navbar .dropdown-content a {
+  color: #333333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  vertical-align: top;
+}
+
+.navbar .dropdown-content a:hover {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.searchbar {
+  margin: auto;
+}
+
+form.searchbar input[type=text] {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 13px;
+  font-size: 12px;
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  float: left;
+  width: 200px;
+  height: 41px;
+  background: #f1f1f1;
+}
+
+form.searchbar button {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  float: left;
+  width: 50px;
+  height: 41px;
+
+  background: lavender;
+  color: rebeccapurple;
+  font-size: 16.5px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+form.searchbar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+.titlebar {
+  background-color: lavender;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  width: 1070px;
+  margin: 0;
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: rebeccapurple;
+}
+
+
+.content-box {
+  background-color: white;
+  width: 1080px;
+  float: left;
+  margin: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: auto;
+  display: table;
+}
+
+
+.mainbox {
+  margin: 5px;
+  float: left;
+  overflow: auto;
+  display: table-cell;
+}
+
+.mainbox h4 {
+  margin: 5px;
+  padding: 0;
+  border-bottom: 1px solid;
+}
+
+
+.gallery {
+  display: grid;
+  grid-column: full;
+  grid-template-columns: inherit;
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.gallery .wrapper {
+  grid-column: content;
+  display: flex;
+  align-items: center;
+}
+
+.gallery .item img {
+  max-width: 230px;
+  max-height: 25rem;
+  border-radius: 3px;
+  box-shadow: 3px 3px 2px #222222;
+}
+
+.gallery .item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  inline-size: 100%;
+  max-inline-size: 20rem;
+  aspect-ratio: inherit;
+  font-size: 2rem;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.gallery .title {
+  position: relative;
+}
+
+.gallery .title p {
+  margin: 0;
+  padding: 12px 0 0 0;
+  color: white;
+  font-size: 12px;
+  text-align: left;
+  vertical-align: text-bottom;
+  left: 1px;
+  background-image: url("../img/image_box_shadow_bottom.png");
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  text-shadow: rgba(0,0,0,.8) 1px 1px 0;
+  line-height: 1.3em;
+}
+
+
+.sidebox {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.sidebox li {
+  float: left;
+  padding: 5px;
+  display: table;
+  margin: auto;
+}
+
+.sidebox span {
+  display: table-cell;
+  width: 24px;
+  vertical-align: top;
+  font-size: 20px;
+  padding-left: 5px;
+}
+
+.sidebox img {
+  margin: auto;
+  alignment: center;
+  max-height: 100px;
+  max-width: 100px;
+  border: solid gray 1px;
+}
+
+.sidebox a {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebox a:hover {
+  text-decoration: underline;
+}
+
+.sidebox p {
+  display: table-cell;
+}
+
+.sidebox-info {
+  display: table-cell;
+  padding: 0;
+  padding-left: 10px;
+  margin: 0;
+  vertical-align: top;
+}
+
+.sidebox-info h4 {
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+.sidebox-info-title {
+  color: #333333;
+  display: block;
+  width: 180px;
+}
+
+.sidebox-info-platform {
+  color: slategrey;
+  display: block;
+}
+
+.loginBox {
+  margin: auto;
+  margin-top: 65px;
+  margin-bottom: 65px;
+  display: block;
+  border: 1px solid rebeccapurple;
+  width: 500px;
+  height: 600px;
+}
+
+.loginBox h3 {
+  margin-top: 60px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.loginBox h5 {
+  margin-left: 100px;
+  margin-bottom: 0px;
+}
+
+.loginBox input {
+  width: 300px;
+  height: 40px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.loginBox button {
+  width: 140px;
+  height: 40px;
+  border-radius: 2px;
+  border: none;
+  background-color: rebeccapurple;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 40px;
+  margin-left: 180px;
+
+}
+
+.loginBox button:hover {
+  cursor: pointer;
+}
+
+.faq ul{
+  list-style-type: symbols("A:");
+}

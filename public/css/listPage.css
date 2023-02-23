@@ -1,0 +1,63 @@
+.statusBar {
+  margin: 0;
+  padding: 0;
+  width: 1070px;
+  height: 80px;
+  background-color: rebeccapurple;
+  border-bottom: 1px solid gray;
+  display: table;
+}
+
+.statusBar-content {
+  display: table-cell;
+  text-align: center;
+  padding: 0;
+}
+
+.statusBar-content button {
+  border: none;
+  background: none;
+  color: white;
+  text-align: center;
+  font-size: 22px;
+  padding: 0;
+  margin-top: 26px;
+}
+
+.statusBar-content button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+table {
+  padding: 0;
+  margin: 0;
+  empty-cells: show;
+}
+
+tr {
+  max-height: 200px;
+}
+
+table img {
+  margin: 0;
+  max-height: 200px;
+  max-width: 200px;
+}
+
+th {
+  padding: 0;
+  max-height: 200px;
+}
+
+th:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+a {
+  color: #333333;
+}
+
+a:hover {
+  text-decoration: underline;
+}

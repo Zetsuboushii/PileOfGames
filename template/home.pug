@@ -1,0 +1,64 @@
+html(lang="de")
+    head
+        link(rel="icon", href="/public/favicon.ico")
+        link(rel="stylesheet", href="/public/css/main.css")
+        title PileOfGames
+
+    body
+
+        div(class="container")
+
+            //Hotbar
+            include navbar
+            p(class="titlebar") Startseite
+
+
+            div(class="content-box")
+
+                div(class="mainbox" style="width: 700px; border-right: solid 1px; margin-right: 0;")
+                    //Picks
+                    h4 Vorschläge
+                    div(class="gallery")
+                        div(class="wrapper")
+                            - for (let i = 0; i < 10; i++)
+                                div(class="item")
+                                    div
+                                        a(href="/" + picks[i].title)
+                                            img(alt=picks[i].title src="/public/img/game_covers/game" + pad(picks[i].gNo) + "_cover.jpg")
+                                    //div(class="title")
+                                        a(href="/" + picks[i].title)
+                                            if (picks[i].title.length <= 30)
+                                                br
+                                                p= picks[i].title
+                                            else
+                                                p= picks[i].title
+
+                    //Current
+                    h4 Aktuell
+                    div(class="gallery")
+                        div(class="wrapper")
+                            - for (let i = 0; i < 10; i++)
+                                div(class="item")
+                                    div
+                                        a(href="/" + current[i].title)
+                                            img(alt=current[i].title src="/public/img/game_covers/game" + pad(current[i].gNo) + "_cover.jpg")
+                                    //div(class="title")
+                                        a(href="/" + current[i].title)
+                                            if (current[i].title.length <= 30)
+                                                br
+                                                p= current[i].title
+                                            else
+                                                p= current[i].title
+
+                div(class="mainbox" style="width: 369px; margin-left: 0;")
+                    h4 Aktuell bestbewerteste Titel
+                    ul(class="sidebox")
+                        - for (let rank = 0; rank < 3; rank++)
+                            li
+                                span= rank + 1
+                                p
+                                    a(href="/" + currentBest[rank].title)
+                                        img(alt=currentBest[rank].title src="/public/img/game_covers/game" + pad(currentBest[rank].gNo) + "_cover.jpg")
+                                div(class="sidebox-info")
+                                    h4: a(class="sidebox-info-title" href="/" + currentBest[rank].title)= currentBest[rank].title
+                                    a(class="sidebox-info-platform" href="/" + currentBest[rank].platform)= currentBest[rank].name
