@@ -1,15 +1,14 @@
 - let g = game[0]
+- let sp = seriesPlatform[0]
 - let title = g.title
 - let gNo = g.gNo
 - let synTitles = g.synTitle
 - let orgTitle = g.orgTitle
-- let platform = g.platform
-- let series = g.series
-- let releaseDate = date(g.releaseDate)
+- let platform = sp.platform
+- let series = sp.series
+- let releaseDate = g.releaseDate
 - let synopsis = g.synopsis
 - let metasc = g.metaScore
-- let rank = g.rank
-- let usrscore = g.usrscore
 
 html(lang=de)
     head
@@ -22,152 +21,40 @@ html(lang=de)
         div(class="container")
             include navbar
             div(class="titlebar")
+                | Title
                 form(action="#" method="post")
                     input(name="title" type="text" placeholder=title style="width: 100%")
 
             div(class="content-box")
-                div(class="leftbox")
-                    div(style="width: 300px; height: auto; border-bottom: 1px solid gray")
-                        img(alt=title, src="/public/img/game_covers/game" + pad(gNo) + "_cover.jpg")
-                    div
-                        h4 Andere Namen:
-                        ul
-                            li Synonyme:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < synTitles.split("^").length; i++)
-                                        li
-                                            form(action="#" method="post")
-                                                input(name="synTitle" type="text" placeholder=synTitles.split("^")[i] style="width: 100%")
-                            li Originaltitel:
-                                ul(style="list-style-type: square")
-                                    li
-                                        form(action="#" method="post")
-                                            input(name="orgTitle" type="text" placeholder=orgTitle style="width: 100%")
+                div(style="padding: 10px")
+                    h4 Original Title
+                        form(action="#" method="post")
+                            input(name="orgTitle" type="text" placeholder=orgTitle style="width: 100%")
 
-                        h4 Plattformen:
-                        ul
-                            li Original Plattform:
-                                ul(style="list-style-type: square")
-                                    li
-                                        form(action="#" method="post")
-                                            input(name="platform" type="text" placeholder=platform style="width: 100%")
-                            li Portierungen:
-                                ul(style="list-style-type: square")
-                                    - var i = 0;
-                                    while (i < ports.length + 1)
-                                        li
-                                            form(action="#" method="post")
-                                                input(name="port" type="text" placeholder=ports[i] style="width: 100%")
-                                        - i++
+                    h4 Synonymous Titles
+                        form(action="#" method="post")
+                            input(name="synTitles" type="text" placeholder=synTitles style="width: 100%")
 
-                        h4 Weitere Informationen:
-                        ul
-                            li Spieleserie:
-                                ul(style="list-style-type: square")
-                                    li= series
+                    h4 Original Platform
+                        form(action="#" method="post")
+                            input(name="platform" type="text" placeholder=platform style="width: 100%")
 
-                            li Datum der Ersterscheinung:
-                                ul(style="list-style-type: square")
-                                    li= releaseDate
+                    h4 Series
+                        form(action="#" method="post")
+                            input(name="series" type="text" placeholder=series style="width: 100%")
 
-                            li Genre:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < genres.length; i++)
-                                        li= genres[i].genre
+                    h4 Release Date
+                        form(action="#" method="post")
+                            input(name="releaseDate" type="text" placeholder=releaseDate style="width: 100%")
 
-                            li Publisher:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < publishers.length; i++)
-                                        li= publishers[i].publisher
+                    h4 Meta Score
+                        form(action="#" method="post")
+                            input(name="metaScore" type="text" placeholder=metasc style="width: 100%")
 
-                            li Entwickler:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < developers.length; i++)
-                                        li=developers[i].developer
+                    h4 Synopsis
+                        form(action="#" method="post")
+                            input(name="synopsis" type="text" placeholder=synopsis style="width: 100%")
 
-                            li Spielmodi:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < modes.length; i++)
-                                        li=modes[i].mode
-
-                div(class="rightbox")
-                    div(class="scoreBox")
-                        div(class="metaScoreBox")
-                            h4 MetaScore
-                            if metasc >= 90
-                                div(class="metaScore", style="background-color: limegreen")
-                                    h4= metasc
-                            else if metasc >= 75
-                                div(class="metaScore", style="background-color: #a4de02")
-                                    h4= metasc
-                            else if metasc >= 50
-                                div(class="metaScore", style="background-color: #ffd500")
-                                    h4= metasc
-                            else if metasc >= 25
-                                div(class="metaScore", style="background-color: orangered")
-                                    h4= metasc
-                            else if metasc < 25
-                                div(class="metaScore", style="background-color: red")
-                                    h4= metasc
-
-                        div(class="rankBox")
-                            h4 Ranking
-                            if rank !== null
-                                h3= "#" + rank
-                            else
-                                h3 #----
-
-                        div(class="userScoreBox")
-                            h4 Nutzerbewertung
-                            if usrscore !== null
-                                h3= usrscore + "/10"
-                            else
-                                h3 -- /10
-
-                    div(class="synopsisBox")
-                        h4 Zusammenfassung:
-                        ul(style="list-style-type: none; text-align: justify; padding: 0 60px 20px 20px;")
-                            li=synopsis
-
-                    div(class="relatedBox")
-                        if prequels || sequels || remakes || remasters
-                            h4 Verwandte Titel:
-                            if prequels
-                                h5 Prequel(s):
-                                div(class="gallery")
-                                    div(class="wrapper")
-                                        - for (let i = 0; i < prequels.length; i++)
-                                            div(class="item")
-                                                div
-                                                    a(href="/" + prequels[i].title)
-                                                        img(alt=prequels[i].title src="/public/img/game_covers/game" + pad(prequels[i].gNo) + "_cover.jpg")
-
-                            if sequels
-                                h5 Sequel(s):
-                                div(class="gallery")
-                                    div(class="wrapper")
-                                        - for (let i = 0; i < sequels.length; i++)
-                                            div(class="item")
-                                                div
-                                                    a(href="/" + sequels[i].title)
-                                                        img(alt=sequels[i].title src="/public/img/game_covers/game" + pad(sequels[i].gNo) + "_cover.jpg")
-
-                            if remakes
-                                h5 Remake(s):
-                                div(class="gallery")
-                                    div(class="wrapper")
-                                        - for (let i = 0; i < remakes.length; i++)
-                                            div(class="item")
-                                                div
-                                                    a(href="/" + remakes[i].title)
-                                                        img(alt=remakes[i].title src="/public/img/game_covers/game" + pad(remakes[i].gNo) + "_cover.jpg")
-
-                            if remasters
-                                h5 Remaster(s):
-                                div(class="gallery")
-                                    div(class="wrapper")
-                                        - for (let i = 0; i < remasters.length; i++)
-                                            div(class="item")
-                                                div
-                                                    a(href="/" + remasters[i].title)
-                                                        img(alt=remasters[i].title src="/public/img/game_covers/game" + pad(remasters[i].gNo) + "_cover.jpg")
+                    h4 Developers
+                        form(action="#" method="post")
+                            input(name="synopsis" type="text" placeholder=developers style="width: 100%")

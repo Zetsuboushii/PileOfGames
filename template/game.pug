@@ -29,9 +29,9 @@ html(lang=de)
                         img(alt=title, src="/public/img/game_covers/game" + pad(gNo) + "_cover.jpg")
                     div
                         h4 Andere Namen:
-                        if synTitles || orgTitle
+                        if synTitles.length || orgTitle
                             ul
-                                if synTitles
+                                if synTitles.length
                                     li Synonyme:
                                         ul(style="list-style-type: square")
                                             - for (let i = 0; i < synTitles.split("^").length; i++)
@@ -47,7 +47,7 @@ html(lang=de)
                                 ul(style="list-style-type: square")
                                     li
                                         a(href="/" + platform)= platform
-                            if ports != null
+                            if ports.length
                                 li Portierungen:
                                     ul(style="list-style-type: square")
                                         - for (let i = 0; i < ports.length; i++)
@@ -56,33 +56,39 @@ html(lang=de)
 
                         h4 Weitere Informationen:
                         ul
-                            li Spieleserie:
-                                ul(style="list-style-type: square")
-                                    li= series
+                            if series
+                                li Spieleserie:
+                                    ul(style="list-style-type: square")
+                                        li= series
 
-                            li Datum der Ersterscheinung:
-                                ul(style="list-style-type: square")
-                                    li= releaseDate
+                            if releaseDate
+                                li Datum der Ersterscheinung:
+                                    ul(style="list-style-type: square")
+                                        li= releaseDate
 
-                            li Genre:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < genres.length; i++)
-                                        li= genres[i].genre
+                            if genres.length
+                                li Genre:
+                                    ul(style="list-style-type: square")
+                                        - for (let i = 0; i < genres.length; i++)
+                                            li= genres[i].genre
 
-                            li Publisher:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < publishers.length; i++)
-                                        li= publishers[i].publisher
+                            if publishers.length
+                                li Publisher:
+                                    ul(style="list-style-type: square")
+                                        - for (let i = 0; i < publishers.length; i++)
+                                            li= publishers[i].publisher
 
-                            li Entwickler:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < developers.length; i++)
-                                        li=developers[i].developer
+                            if developers.length
+                                li Entwickler:
+                                    ul(style="list-style-type: square")
+                                        - for (let i = 0; i < developers.length; i++)
+                                            li=developers[i].developer
 
-                            li Spielmodi:
-                                ul(style="list-style-type: square")
-                                    - for (let i = 0; i < modes.length; i++)
-                                        li=modes[i].mode
+                            if modes.length
+                                li Spielmodi:
+                                    ul(style="list-style-type: square")
+                                        - for (let i = 0; i < modes.length; i++)
+                                            li=modes[i].mode
 
                 div(class="rightbox")
                     div(class="scoreBox")
@@ -106,20 +112,46 @@ html(lang=de)
 
                         div(class="rankBox")
                             h4 Ranking
-                            if rank != null
+                            if rank !== null
                                 h3= "#" + rank
                             else
                                 h3 #----
 
                         div(class="userScoreBox")
                             h4 Nutzerbewertung
-                            if usrscore != null
+                            if usrscore !== null
                                 h3= usrscore + "/10"
                             else
                                 h3 -- /10
 
-                    //div(class="listAddBox")
-                        div(class="addBox")
+                    if session.username
+                        div(class="listAddBox")
+                            div(class="addBox")
+                                form(action="/" + title method="post")
+                                    if listEntry.length === 0
+                                        button(name="listAdd" value="1" style="background-color: rebeccapurple; color: white") Zu Liste hinzufügen
+                                    else
+                                        button(name="listRemove" value="1" style="background-color: lavender") Von Liste entfernen
+                            if listEntry.length !== 0
+                                div(class="scoreSelectBox")
+                                    div(class="scoreSelect")
+                                        span(style="margin: 5px")
+                                            div(style="display: inline-block; margin-left: 5px") Score
+                                            form(action="#" method="post")
+                                                input(name="score" type="number" min="0" max="10" placeholder=listEntry[0].score ? listEntry[0].score + "": "")
+                                            div(style="display: inline-block; color: yellow") ★
+                                div(class="statusSelectBox")
+                                    form(action="#" method="post")
+                                        select(id="select" name="listStatus")
+                                            option(value="6") Geplant
+                                            option(value="2") Am Spielen
+                                            option(value="3") Abgeschlossen
+                                            option(value="4") Nicht fortgesetzt
+                                            option(value="5") Abgebrochen
+                                        input(type="submit" style="width: auto" value="✓")
+
+
+
 
                     div(class="synopsisBox")
                         h4 Zusammenfassung:
